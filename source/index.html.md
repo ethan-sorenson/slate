@@ -129,6 +129,8 @@ token | true | Stored token from the GetToken endpoint.
 
 # Map Information
 
+The Map Information endpoints can be used to retrieve information about process setups.
+
 ## GetMapList
 
 > To retrieve a list of processes, use this code:
@@ -300,6 +302,10 @@ mapKey | true | Unique identifier for the process to retrieve
 
 # Map Data
 
+The Map Data endpoints can be used to retrieve data from the data source defined in SmartConnect. If the data source is a query, a call will be made by SmartConnect to the source application for live data.
+
+<aside class="warning">You will not be able to get data from real-time data source maps.</aside>
+
 ## GetAllData
 
 > To retrieve currently defined source data, use this code:
@@ -438,6 +444,8 @@ mapKey | true | Unique identifier for the process to retrieve
 <aside class="warning">Currently this endpoint only returns data as XML</aside>
 
 # Map Runs
+
+The Map Run endpoints can be used to run maps in SmartConnect. Upon completion of the map run in SmartConnect, the web service will respond with a status message.
 
 ## Run Map Properties
 
