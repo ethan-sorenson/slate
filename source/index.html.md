@@ -436,3 +436,254 @@ mapKey | true | Unique identifier for the process to retrieve
 
 
 <aside class="warning">Currently this endpoint only returns data in XML</aside>
+
+# Map Runs
+
+## Run Map Properties
+
+Attribute | Type | Description
+--------- | ------- | -----------
+ErrorCount | integer | Number of failed records
+Errors | data-table | XMl data table, populated when a record fails
+MapDescription | string | Map Description field for the process
+MapKey | guid | Unique identifier for the process
+MapId | string | Map Id field for the process
+RecordCount | integer | Number of records processed in run
+RunNumber | integer | Run number
+Status | boolean | 0 = success, 1 = failure
+ErrorMessage | string | Last Error Message from the run
+
+## RunMap
+
+> To run a specified process, use this code:
+
+```shell
+curl POST "{{API Url}}/runmap?token={{Token}}&mapKey={{mapKey}}" \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json' 
+```
+
+```python
+import requests
+
+url = "{{API Url}}/runmap?token={{Token}}&mapKey={{mapKey}}"
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers)
+
+print(response.text.encode('utf8'))
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "ErrorCount": 1,
+    "Errors": "",
+    "MapDescription": "Import of Purchase Journal",
+    "MapKey": "364fde19-0748-4d10-886f-a95300a506c5",
+    "MapId": "EXCEL TO BUSINESS CENTRAL PURCHASE JOURNAL",
+    "RecordCount": 1,
+    "RunNumber": 80,
+    "Status": 1,
+    "ErrorMessage": "Failed to create record.The remote server returned an error: (404) Not Found. : The Gen. Journal Batch does not exist. Identification fields and values: Journal Template Name='PURCHASES',Name='ETHAN'  CorrelationId:  c2928af1-eadf-486c-b4e3-3b2a05aaff1f."
+```
+
+> The errors field will contain an XML Data Table:
+
+```xml
+<NewDataSet>\r\n  
+    <xs:schema id=\"NewDataSet\"
+        xmlns=\"\"
+        xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"
+        xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">\r\n    
+        <xs:element name=\"NewDataSet\" msdata:IsDataSet=\"true\" msdata:MainDataTable=\"ErrorTable\" msdata:UseCurrentLocale=\"true\">\r\n      
+            <xs:complexType>\r\n        
+                <xs:choice minOccurs=\"0\" maxOccurs=\"unbounded\">\r\n          
+                    <xs:element name=\"ErrorTable\">\r\n            
+                        <xs:complexType>\r\n              
+                            <xs:sequence>\r\n                
+                                <xs:element name=\"PostingDate\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"Batch\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"DocumentNo\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"AccountType\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"AccountNo\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"AccountDescription\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"Amount\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"EONERUNERRORS\" type=\"xs:string\" minOccurs=\"0\" />\r\n              
+                            </xs:sequence>\r\n            
+                        </xs:complexType>\r\n          
+                    </xs:element>\r\n        
+                </xs:choice>\r\n      
+            </xs:complexType>\r\n    
+        </xs:element>\r\n  
+    </xs:schema>\r\n  
+    <ErrorTable>\r\n    
+        <PostingDate>9/16/2018 12:00:00 AM</PostingDate>\r\n    
+        <Batch>ETHAN</Batch>\r\n    
+        <DocumentNo>Test001</DocumentNo>\r\n    
+        <AccountType>G_L_Account</AccountType>\r\n    
+        <AccountNo>20100</AccountNo>\r\n    
+        <AccountDescription>Accounts Payable</AccountDescription>\r\n    
+        <Amount>50</Amount>\r\n    
+        <EONERUNERRORS>The remote server returned an error: (404) Not Found. : The Gen. Journal Batch does not exist. Identification fields and values: Journal Template Name='PURCHASES',Name='ETHAN'  CorrelationId:  c2928af1-eadf-486c-b4e3-3b2a05aaff1f.</EONERUNERRORS>\r\n  
+    </ErrorTable>\r\n  
+    <ErrorTable>\r\n    
+        <PostingDate>9/16/2018 12:00:00 AM</PostingDate>\r\n    
+        <Batch>ETHAN</Batch>\r\n    
+        <DocumentNo>Test001</DocumentNo>\r\n    
+        <AccountType>G_L_Account</AccountType>\r\n    
+        <AccountNo>10500</AccountNo>\r\n    
+        <AccountDescription>Prepaid Rent</AccountDescription>\r\n    
+        <Amount>60</Amount>\r\n    
+        <EONERUNERRORS>The remote server returned an error: (404) Not Found. : The Gen. Journal Batch does not exist. Identification fields and values: Journal Template Name='PURCHASES',Name='ETHAN'  CorrelationId:  c2928af1-eadf-486c-b4e3-3b2a05aaff1f.</EONERUNERRORS>\r\n  
+    </ErrorTable>\r\n  
+</NewDataSet>
+```
+
+This endpoint runs the specified process.
+
+### HTTP Request
+
+`POST {{API Url}}/runmap?token={{Token}}&mapKey={{mapKey}}`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+token | true | Token generated by the GetToken endpoint
+mapKey | true | Unique identifier for the process to retrieve
+
+
+<aside class="warning">Currently this endpoint only returns the errors as an XML data table</aside>
+
+## RunMapWithVariables
+
+> To run a specified process and provide Global Variables, use this code:
+
+```shell
+curl POST "{{API Url}}/RunMapWithVariables?token={{Token}}&mapKey={{mapKey}}" \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' 
+  -d '[
+       {
+         "Key": "GBL_TEST",
+         "Value": "107210"
+        },
+      {
+         "Key": "GBL_TEST2",
+         "Value": "Sample"
+       }
+     ]'
+```
+
+```python
+import requests
+
+url = "{{API Url}}/RunMapWithVariables?token={{Token}}&mapKey={{mapKey}}"
+headers = {
+  'Content-Type': 'application/application/json',
+  'Accept': 'application/application/json'
+}
+payload = 
+[
+    {
+        "Key": "GBL_TEST",
+        "Value": "107210"
+    },
+    {
+        "Key": "GBL_TEST2",
+        "Value": "Sample"
+    }
+]
+
+response = requests.request("POST", url, headers=headers, data = payload)
+
+print(response.text.encode('utf8'))
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "ErrorCount": 1,
+    "Errors": "",
+    "MapDescription": "Import of Purchase Journal",
+    "MapKey": "364fde19-0748-4d10-886f-a95300a506c5",
+    "MapId": "EXCEL TO BUSINESS CENTRAL PURCHASE JOURNAL",
+    "RecordCount": 1,
+    "RunNumber": 80,
+    "Status": 1,
+    "ErrorMessage": "Failed to create record.The remote server returned an error: (404) Not Found. : The Gen. Journal Batch does not exist. Identification fields and values: Journal Template Name='PURCHASES',Name='ETHAN'  CorrelationId:  c2928af1-eadf-486c-b4e3-3b2a05aaff1f."
+```
+
+> The errors field will contain an XML Data Table:
+
+```xml
+<NewDataSet>\r\n  
+    <xs:schema id=\"NewDataSet\"
+        xmlns=\"\"
+        xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"
+        xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">\r\n    
+        <xs:element name=\"NewDataSet\" msdata:IsDataSet=\"true\" msdata:MainDataTable=\"ErrorTable\" msdata:UseCurrentLocale=\"true\">\r\n      
+            <xs:complexType>\r\n        
+                <xs:choice minOccurs=\"0\" maxOccurs=\"unbounded\">\r\n          
+                    <xs:element name=\"ErrorTable\">\r\n            
+                        <xs:complexType>\r\n              
+                            <xs:sequence>\r\n                
+                                <xs:element name=\"PostingDate\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"Batch\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"DocumentNo\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"AccountType\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"AccountNo\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"AccountDescription\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"Amount\" type=\"xs:string\" minOccurs=\"0\" />\r\n                
+                                <xs:element name=\"EONERUNERRORS\" type=\"xs:string\" minOccurs=\"0\" />\r\n              
+                            </xs:sequence>\r\n            
+                        </xs:complexType>\r\n          
+                    </xs:element>\r\n        
+                </xs:choice>\r\n      
+            </xs:complexType>\r\n    
+        </xs:element>\r\n  
+    </xs:schema>\r\n  
+    <ErrorTable>\r\n    
+        <PostingDate>9/16/2018 12:00:00 AM</PostingDate>\r\n    
+        <Batch>ETHAN</Batch>\r\n    
+        <DocumentNo>Test001</DocumentNo>\r\n    
+        <AccountType>G_L_Account</AccountType>\r\n    
+        <AccountNo>20100</AccountNo>\r\n    
+        <AccountDescription>Accounts Payable</AccountDescription>\r\n    
+        <Amount>50</Amount>\r\n    
+        <EONERUNERRORS>The remote server returned an error: (404) Not Found. : The Gen. Journal Batch does not exist. Identification fields and values: Journal Template Name='PURCHASES',Name='ETHAN'  CorrelationId:  c2928af1-eadf-486c-b4e3-3b2a05aaff1f.</EONERUNERRORS>\r\n  
+    </ErrorTable>\r\n  
+    <ErrorTable>\r\n    
+        <PostingDate>9/16/2018 12:00:00 AM</PostingDate>\r\n    
+        <Batch>ETHAN</Batch>\r\n    
+        <DocumentNo>Test001</DocumentNo>\r\n    
+        <AccountType>G_L_Account</AccountType>\r\n    
+        <AccountNo>10500</AccountNo>\r\n    
+        <AccountDescription>Prepaid Rent</AccountDescription>\r\n    
+        <Amount>60</Amount>\r\n    
+        <EONERUNERRORS>The remote server returned an error: (404) Not Found. : The Gen. Journal Batch does not exist. Identification fields and values: Journal Template Name='PURCHASES',Name='ETHAN'  CorrelationId:  c2928af1-eadf-486c-b4e3-3b2a05aaff1f.</EONERUNERRORS>\r\n  
+    </ErrorTable>\r\n  
+</NewDataSet>
+```
+
+This endpoint runs the specified process. If the process is using Global Variables, then the default value for those variables can be provided in the body of the request.
+
+### HTTP Request
+
+`POST {{API Url}}/RunMapWithVariables?token={{Token}}&mapKey={{mapKey}}`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+token | true | Token generated by the GetToken endpoint
+mapKey | true | Unique identifier for the process to retrieve
+
+
+<aside class="warning">Currently this endpoint only returns the errors as an XML data table</aside>
