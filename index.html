@@ -289,7 +289,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;cURL&quot;,&quot;Python&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;python&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -299,8 +299,8 @@
     <div class="toc-wrapper">
       <img src="images/logo-1e815a84.png" class="logo" alt="" />
         <div class="lang-selector">
-              <a href="#" data-language-name="cURL">cURL</a>
-              <a href="#" data-language-name="Python">Python</a>
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="python">python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -330,7 +330,7 @@
               </ul>
           </li>
           <li>
-            <a href="#map-data" class="toc-h1 toc-link" data-title="Map Data">Map Data</a>
+            <a href="#map-information" class="toc-h1 toc-link" data-title="Map Information">Map Information</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#getmaplist" class="toc-h2 toc-link" data-title="GetMapList">GetMapList</a>
@@ -344,16 +344,13 @@
               </ul>
           </li>
           <li>
-            <a href="#map-information" class="toc-h1 toc-link" data-title="Map Information">Map Information</a>
+            <a href="#map-data" class="toc-h1 toc-link" data-title="Map Data">Map Data</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#getalldata" class="toc-h2 toc-link" data-title="GetAllData">GetAllData</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
-                  </li>
-                  <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#getalldatawithvariables" class="toc-h2 toc-link" data-title="GetAllDataWithVariables">GetAllDataWithVariables</a>
                   </li>
               </ul>
           </li>
@@ -422,7 +419,7 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 <blockquote>
 <p>To generate a token, use this code:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>curl POST "{{API Url}}/GetToken?email={{Username}}&amp;password={{EncryptedPassword}}&amp;companyId={{Customer Id}}"
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"{{API Url}}/GetToken?email={{Username}}&amp;password={{EncryptedPassword}}&amp;companyId={{Customer Id}}"</span>
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetToken?email={{Username}}&amp;password={{EncryptedPassword}}&amp;companyId={{Customer Id}}"</span>
@@ -436,9 +433,8 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 <blockquote>
 <p>The above command returns a string:</p>
 </blockquote>
-
-<p><code>Um5UVHZsWU1XZ09xYzE1R3dOZXhNV0Jka25FcEg3L2ZtZjVMSkxIdEZsUT0jQjE2QkIzNTMtNTFFOC00MkNBLTgxRDEtNUVCQjA0QUIxMzQ5I0MzMzhDRUI1LTBEOTctNEU1Ny05MDU4LUNFN0NBRDNEODU2RCNFVEhBTi5TT1JFTlNPTkBFT05FU09MVVRJT05TLkNPTSMyMDIwLTEwLTAyVDA4OjA1OjE1Ljg2Ng==</code></p>
-<h3 id='http-request'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="s2">"Um5UVHZsWU1XZ09xYzE1R3dOZXhNV0Jka25FcEg3L2ZtZjVMSkxIdEZsUT0jQjE2QkIzNTMtNTFFOC00MkNBLTgxRDEtNUVCQjA0QUIxMzQ5I0MzMzhDRUI1LTBEOTctNEU1Ny05MDU4LUNFN0NBRDNEODU2RCNFVEhBTi5TT1JFTlNPTkBFT05FU09MVVRJT05TLkNPTSMyMDIwLTEwLTAyVDA4OjA1OjE1Ljg2Ng=="</span><span class="w">
+</span></code></pre></div><h3 id='http-request'>HTTP Request</h3>
 <p><code>POST {{API Url}}/GetToken</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
@@ -468,7 +464,7 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 <blockquote>
 <p>To validate stored token, use this code:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>curl POST "{{API Url}}/validate?token={{Token}}"
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"{{API Url}}/validate?token={{Token}}"</span>
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/validate?token={{Token}}"</span>
@@ -482,9 +478,8 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 <blockquote>
 <p>The above command returns a boolean:</p>
 </blockquote>
-
-<p><code>true</code></p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="kc">true</span><span class="w">
+</span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
 <p><code>POST {{API Url}}/validate</code></p>
 <h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
@@ -500,13 +495,13 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 <td>Stored token from the GetToken endpoint.</td>
 </tr>
 </tbody></table>
-<h1 id='map-data'>Map Data</h1><h2 id='getmaplist'>GetMapList</h2>
+<h1 id='map-information'>Map Information</h1><h2 id='getmaplist'>GetMapList</h2>
 <blockquote>
 <p>To retrieve a list of processes, use this code:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>curl POST "{{API Url}}/GetMapList?token={{Token}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json' 
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"{{API Url}}/GetMapList?token={{Token}}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetMapList?token={{Token}}"</span>
@@ -560,9 +555,9 @@ Real-time data source maps will not show in this list.
 <blockquote>
 <p>To retrieve a list of columns defined in a process, use this code:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>curl POST "{{API Url}}/GetMapColumns?token={{Token}}&amp;mapKey={{mapKey}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json' 
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"{{API Url}}/GetMapColumns?token={{Token}}&amp;mapKey={{mapKey}}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetMapColumns?token={{Token}}&amp;mapKey={{mapKey}}"</span>
@@ -619,9 +614,9 @@ Real-time data source maps will not show in this list.
 <blockquote>
 <p>To retrieve a list of columns mapped in the destination, use this code:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>curl POST "{{API Url}}/GetMappedMapColumns?token={{Token}}&amp;mapKey={{mapKey}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json' 
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"{{API Url}}/GetMappedMapColumns?token={{Token}}&amp;mapKey={{mapKey}}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetMappedMapColumns?token={{Token}}&amp;mapKey={{mapKey}}"</span>
@@ -674,149 +669,147 @@ Real-time data source maps will not show in this list.
 <td>Unique identifier for the process to retrieve</td>
 </tr>
 </tbody></table>
-<h1 id='map-information'>Map Information</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='map-data'>Map Data</h1><h2 id='getalldata'>GetAllData</h2>
+<blockquote>
+<p>To retrieve currently defined source data, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"{{API Url}}/GetAllData?token={{Token}}&amp;mapKey={{mapKey}}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/xml'</span> 
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetAllData?token={{Token}}&amp;mapKey={{mapKey}}"</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/xml'</span>
+<span class="p">}</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The above command returns XML structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint retrieves all kittens.</p>
+<div class="highlight"><pre class="highlight xml tab-xml"><code><span class="nt">&lt;string</span> <span class="na">xmlns=</span><span class="s">"http://schemas.microsoft.com/2003/10/Serialization/"</span><span class="nt">&gt;</span><span class="ni">&amp;lt;</span>MyDataSet<span class="ni">&amp;gt;&amp;#xD;</span>
+  <span class="ni">&amp;lt;</span>Table01<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>AccountNumber<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[CUST001]]<span class="ni">&amp;gt;&amp;lt;</span>/AccountNumber<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>AccountName<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[Purus Limited]]<span class="ni">&amp;gt;&amp;lt;</span>/AccountName<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>AddressCode<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[Other]]<span class="ni">&amp;gt;&amp;lt;</span>/AddressCode<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>Address1<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[373-1399 Ultrices St.]]<span class="ni">&amp;gt;&amp;lt;</span>/Address1<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>City<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[Denver]]<span class="ni">&amp;gt;&amp;lt;</span>/City<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>State<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[CO]]<span class="ni">&amp;gt;&amp;lt;</span>/State<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>ZIP<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[92336]]<span class="ni">&amp;gt;&amp;lt;</span>/ZIP<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>Phone<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[(303) 654-2228]]<span class="ni">&amp;gt;&amp;lt;</span>/Phone<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>Currency<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[CAD$]]<span class="ni">&amp;gt;&amp;lt;</span>/Currency<span class="ni">&amp;gt;&amp;#xD;</span>
+  <span class="ni">&amp;lt;</span>/Table01<span class="ni">&amp;gt;&amp;#xD;</span>
+<span class="ni">&amp;lt;</span>/MyDataSet<span class="ni">&amp;gt;</span><span class="nt">&lt;/string&gt;</span>
+</code></pre></div>
+<p>This endpoint retrieves the current defined source for the specified process.</p>
 <h3 id='http-request-6'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
+<p><code>POST {{API Url}}/GetAllData</code></p>
 <h3 id='query-parameters-6'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
+<th>Required</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
+<td>token</td>
 <td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>Token generated by the GetToken endpoint</td>
+</tr>
+<tr>
+<td>mapKey</td>
+<td>true</td>
+<td>Unique identifier for the process to retrieve</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<aside class="warning">Currently this endpoint only returns data in XML</aside>
+<h2 id='getalldatawithvariables'>GetAllDataWithVariables</h2>
+<blockquote>
+<p>To retrieve currently defined source with Global Variable filters, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"{{API Url}}/GetAllDataWithVariables?token={{Token}}&amp;mapKey={{mapKey}}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/xml'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'[
+        {
+          "Key": "GBL_TEST",
+          "Value": "107210"
+         },
+       {
+          "Key": "GBL_TEST2",
+          "Value": "Sample"
+        }
+      ]'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetAllDataWithVariables?token={{Token}}&amp;mapKey={{mapKey}}"</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/xml'</span>
+<span class="p">}</span>
+<span class="n">payload</span> <span class="o">=</span> 
+<span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s">"Key"</span><span class="p">:</span> <span class="s">"GBL_TEST"</span><span class="p">,</span>
+        <span class="s">"Value"</span><span class="p">:</span> <span class="s">"107210"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s">"Key"</span><span class="p">:</span> <span class="s">"GBL_TEST2"</span><span class="p">,</span>
+        <span class="s">"Value"</span><span class="p">:</span> <span class="s">"Sample"</span>
+    <span class="p">}</span>
+<span class="p">]</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The above command returns XML structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<div class="highlight"><pre class="highlight xml tab-xml"><code><span class="nt">&lt;string</span> <span class="na">xmlns=</span><span class="s">"http://schemas.microsoft.com/2003/10/Serialization/"</span><span class="nt">&gt;</span><span class="ni">&amp;lt;</span>MyDataSet<span class="ni">&amp;gt;&amp;#xD;</span>
+  <span class="ni">&amp;lt;</span>Table01<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>AccountNumber<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[CUST001]]<span class="ni">&amp;gt;&amp;lt;</span>/AccountNumber<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>AccountName<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[Purus Limited]]<span class="ni">&amp;gt;&amp;lt;</span>/AccountName<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>AddressCode<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[Other]]<span class="ni">&amp;gt;&amp;lt;</span>/AddressCode<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>Address1<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[373-1399 Ultrices St.]]<span class="ni">&amp;gt;&amp;lt;</span>/Address1<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>City<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[Denver]]<span class="ni">&amp;gt;&amp;lt;</span>/City<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>State<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[CO]]<span class="ni">&amp;gt;&amp;lt;</span>/State<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>ZIP<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[92336]]<span class="ni">&amp;gt;&amp;lt;</span>/ZIP<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>Phone<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[(303) 654-2228]]<span class="ni">&amp;gt;&amp;lt;</span>/Phone<span class="ni">&amp;gt;&amp;#xD;</span>
+    <span class="ni">&amp;lt;</span>Currency<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[CAD$]]<span class="ni">&amp;gt;&amp;lt;</span>/Currency<span class="ni">&amp;gt;&amp;#xD;</span>
+  <span class="ni">&amp;lt;</span>/Table01<span class="ni">&amp;gt;&amp;#xD;</span>
+<span class="ni">&amp;lt;</span>/MyDataSet<span class="ni">&amp;gt;</span><span class="nt">&lt;/string&gt;</span>
+</code></pre></div>
+<p>This endpoint retrieves the current defined source for the specified process. If the data source is using Global Variables in the query, the values passed in the body will be applied as filters prior to retrieving the data.</p>
 <h3 id='http-request-7'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<p><code>POST {{API Url}}/GetAllDataWithVariables</code></p>
+<h3 id='query-parameters-7'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>token</td>
+<td>true</td>
+<td>Token generated by the GetToken endpoint</td>
+</tr>
+<tr>
+<td>mapKey</td>
+<td>true</td>
+<td>Unique identifier for the process to retrieve</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  <span class="nt">-X</span> DELETE
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-8'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
+<aside class="warning">Currently this endpoint only returns data in XML</aside>
 <h1 id='errors'>Errors</h1>
 <p>The SmartConnect API uses the following error codes:</p>
 
@@ -843,8 +836,8 @@ Remember — a happy kitten is an authenticated kitten!
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="cURL">cURL</a>
-                <a href="#" data-language-name="Python">Python</a>
+                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="python">python</a>
           </div>
       </div>
     </div>
