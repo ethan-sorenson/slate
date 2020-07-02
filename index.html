@@ -280,7 +280,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-479af156.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-22326b03.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-9f013770.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-e9bde216.js"></script>
 
@@ -518,7 +518,9 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 <td>Stored token from the GetToken endpoint.</td>
 </tr>
 </tbody></table>
-<h1 id='map-information'>Map Information</h1><h2 id='getmaplist'>GetMapList</h2>
+<h1 id='map-information'>Map Information</h1>
+<p>The Map Information endpoints can be used to retrieve information about process setups.</p>
+<h2 id='getmaplist'>GetMapList</h2>
 <blockquote>
 <p>To retrieve a list of processes, use this code:</p>
 </blockquote>
@@ -692,7 +694,11 @@ Real-time data source maps will not show in this list.
 <td>Unique identifier for the process to retrieve</td>
 </tr>
 </tbody></table>
-<h1 id='map-data'>Map Data</h1><h2 id='getalldata'>GetAllData</h2>
+<h1 id='map-data'>Map Data</h1>
+<p>The Map Data endpoints can be used to retrieve data from the data source defined in SmartConnect. If the data source is a query, a call will be made by SmartConnect to the source application for live data.</p>
+
+<aside class="warning">You will not be able to get data from real-time data source maps.</aside>
+<h2 id='getalldata'>GetAllData</h2>
 <blockquote>
 <p>To retrieve currently defined source data, use this code:</p>
 </blockquote>
@@ -833,7 +839,9 @@ Real-time data source maps will not show in this list.
 </tbody></table>
 
 <aside class="warning">Currently this endpoint only returns data as XML</aside>
-<h1 id='map-runs'>Map Runs</h1><h2 id='run-map-properties'>Run Map Properties</h2>
+<h1 id='map-runs'>Map Runs</h1>
+<p>The Map Run endpoints can be used to run maps in SmartConnect. Upon completion of the map run in SmartConnect, the web service will respond with a status message.</p>
+<h2 id='run-map-properties'>Run Map Properties</h2>
 <table><thead>
 <tr>
 <th>Attribute</th>
