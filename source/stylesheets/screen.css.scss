@@ -23,8 +23,10 @@ under the License.
 ////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF
 ////////////////////////////////////////////////////////////////////////////////
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");html {
-  font-family: sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");html {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%
 }
@@ -171,7 +173,7 @@ html, body {
   .toc-list-h2 {
     display: none;
     background-color: $nav-subitem-bg;
-    font-weight: 500;
+    font-weight: normal;
   }
 
   .toc-h2 {
@@ -283,13 +285,12 @@ html, body {
 }
 
 .lang-selector {
-  display: flex;
   background-color: $lang-select-bg;
   width: 100%;
   font-weight: bold;
-  overflow-x: auto;
   a {
-    display: inline;
+    display: block;
+    float:left;
     color: $lang-select-text;
     text-decoration: none;
     padding: 0 10px;
@@ -637,3 +638,5 @@ html, body {
 .copy-clipboard:hover {
   opacity: 0.8;
 }
+@import 'lang-selector';
+@import 'toc';
