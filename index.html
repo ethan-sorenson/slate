@@ -333,7 +333,19 @@
             <a href="#map-information" class="toc-h1 toc-link" data-title="Map Information">Map Information</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#getconnections" class="toc-h2 toc-link" data-title="GetConnections">GetConnections</a>
+                  </li>
+                  <li>
+                    <a href="#getdatasources" class="toc-h2 toc-link" data-title="GetDataSources">GetDataSources</a>
+                  </li>
+                  <li>
                     <a href="#getmaplist" class="toc-h2 toc-link" data-title="GetMapList">GetMapList</a>
+                  </li>
+                  <li>
+                    <a href="#getprocessesbyconnection" class="toc-h2 toc-link" data-title="GetProcessesByConnection">GetProcessesByConnection</a>
+                  </li>
+                  <li>
+                    <a href="#getprocessesfordatasource" class="toc-h2 toc-link" data-title="GetProcessesForDatasource">GetProcessesForDatasource</a>
                   </li>
                   <li>
                     <a href="#getmapcolumns" class="toc-h2 toc-link" data-title="GetMapColumns">GetMapColumns</a>
@@ -439,6 +451,15 @@
 Tokens are company specific and are valid for 3 months. If your username has access to multiple companies, you will need to generate a separate token for each company.
 </aside>
 <h2 id='gettoken'>GetToken</h2>
+<p>The GetToken endpoint requires 3 parameters. To generate a token.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>https://{{API_Url}}/GetToken</h6>
+    </div>
+</div>
+
 <blockquote>
 <p>To generate a token, use this code:</p>
 </blockquote>
@@ -451,20 +472,11 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
 </code></pre></div>
-<p>The GetToken endpoint requires 3 parameters. To generate a token.</p>
-
 <blockquote>
 <p>The above command returns a string:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="s2">"Um5UVHZsWU1XZ09xYzE1R3dOZXhNV0Jka25FcEg3L2ZtZjVMSkxIdEZsUT0jQjE2QkIzNTMtNTFFOC00MkNBLTgxRDEtNUVCQjA0QUIxMzQ5I0MzMzhDRUI1LTBEOTctNEU1Ny05MDU4LUNFN0NBRDNEODU2RCNFVEhBTi5TT1JFTlNPTkBFT05FU09MVVRJT05TLkNPTSMyMDIwLTEwLTAyVDA4OjA1OjE1Ljg2Ng=="</span><span class="w">
-</span></code></pre></div><h3 id='http-request'>HTTP Request</h3>
-<div class="api-endpoint">
-    <div class="endpoint-data">
-        <i class="label label-get">POST</i>
-        <h6>https://{{API Url}}/GetToken</h6>
-    </div>
-</div>
-<h3 id='query-parameters'>Query Parameters</h3>
+</span></code></pre></div><h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -489,6 +501,15 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 </tr>
 </tbody></table>
 <h2 id='validate'>Validate</h2>
+<p>The Validate endpoint will return a Boolean to inform the client whether the token is valid or not.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>https://{{API_Url}}/validate</h6>
+    </div>
+</div>
+
 <blockquote>
 <p>To validate stored token, use this code:</p>
 </blockquote>
@@ -501,15 +522,11 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
 </code></pre></div>
-<p>The Validate endpoint will return a Boolean to inform the client whether the token is valid or not.</p>
-
 <blockquote>
 <p>The above command returns a boolean:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="kc">true</span><span class="w">
-</span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
-<p><code>POST {{API Url}}/validate</code></p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+</span></code></pre></div><h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -525,7 +542,134 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 </tbody></table>
 <h1 id='map-information'>Map Information</h1>
 <p>The Map Information endpoints can be used to retrieve information about process setups.</p>
+<h2 id='getconnections'>GetConnections</h2>
+<p>This endpoint retrieves all configured connections.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>https://{{API_Url}}/GetConnections</h6>
+    </div>
+</div>
+
+<blockquote>
+<p>To retrieve a list of connrctions, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl GET <span class="s2">"{{API Url}}/GetConnections?token={{Token}}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetConnections?token={{Token}}"</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c365b728-60e0-4841-841c-ab73008dd41d"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Production SalesForce"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ConnectionType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SalesForce"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b763e98-37c4-4d32-8320-abb200d82e59"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sandbox NAV"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ConnectionType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dynamics NAV Odata"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>true</td>
+<td>Token generated by the GetToken endpoint</td>
+</tr>
+</tbody></table>
+<h2 id='getdatasources'>GetDataSources</h2>
+<p>This endpoint retrieves all configured Data Sources.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>https://{{API_Url}}/GetDataSources</h6>
+    </div>
+</div>
+
+<blockquote>
+<p>To retrieve a list of Data Sources, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl GET <span class="s2">"{{API Url}}/GetDataSources?token={{Token}}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetDataSources?token={{Token}}"</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bea56ad6-2b4e-4c4f-ae68-a9cf008cee3d"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accounts"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ConnectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8586a527-76d4-4dc4-9128-a92f00e3b85e"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eOne D365Demo"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft CRM Real-Time Data Source"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3727ed7d-f6bc-4a8d-8b00-a9d800f01fe9"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bank File"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ConnectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000000-0000-0000-0000-000000000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Company"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft Excel"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>true</td>
+<td>Token generated by the GetToken endpoint</td>
+</tr>
+</tbody></table>
 <h2 id='getmaplist'>GetMapList</h2>
+<p>This endpoint retrieves all processes that can be used by the SmartConnect API.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>https://{{API_Url}}/GetMapList</h6>
+    </div>
+</div>
+
 <blockquote>
 <p>To retrieve a list of processes, use this code:</p>
 </blockquote>
@@ -559,11 +703,7 @@ Tokens are company specific and are valid for 3 months. If your username has acc
     </span><span class="nl">"MapDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sales Orders to BC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint retrieves all processes that can be used by the SmartConnect API.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>POST {{API Url}}/GetMapList</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+</span></code></pre></div><h3 id='query-parameters-3'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -581,7 +721,155 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 <aside class="notice">
 Real-time data source maps will not show in this list.
 </aside>
+<h2 id='getprocessesbyconnection'>GetProcessesByConnection</h2>
+<p>This endpoint retrieves all integration processes configured using the specified Connection as the target.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>https://{{API_Url}}/GetProcessesByConnection</h6>
+    </div>
+</div>
+
+<blockquote>
+<p>To retrieve a list of Integration Processes by Conenction, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl GET <span class="s2">"{{API Url}}/GetProcessesByConnection?token={{Token}}&amp;connectionId={{connectionId}}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetProcessesByConnection?token={{Token}}&amp;connectionId={{connectionId}}"</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"Items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"mapKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000000-0000-0000-0000-000000000000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"mapId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BULK BC ITEM Import"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"mapDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bulk update of inventory levels from BC to Magento"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"49514fca-f62b-445a-ae93-ac1500dcba76"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"connectionType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eOne.SmartConnect.Connectors.GenericRest.GenericRestDestination"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"destinationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eOne.SmartConnect.Connectors.GenericRest.GenericRestDestination"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"storesErrors"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"isOutputProcess"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"lines"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"lineId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c2f66328-46b6-429c-bbed-ac2200c71305"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Update Product Inventory"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"technicalName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_a2e1d210-70ed-4361-8b9c-ac2200c1845d"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"technicalValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"tenants"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"tenantId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98f6d277-5934-4eed-a0ee-ac2200c87093"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GenericRest"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"serverName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Magento 2"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"technicalName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Magento"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>true</td>
+<td>Token generated by the GetToken endpoint</td>
+</tr>
+<tr>
+<td>connectionId</td>
+<td>true</td>
+<td>Unique id for the connection</td>
+</tr>
+</tbody></table>
+<h2 id='getprocessesfordatasource'>GetProcessesForDatasource</h2>
+<p>This endpoint retrieves all integration processes configured using the specified Data Source.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>https://{{API_Url}}/GetProcessesForDatasource</h6>
+    </div>
+</div>
+
+<blockquote>
+<p>To retrieve a list of Integration Processes by Data Source, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl GET <span class="s2">"{{API Url}}/GetProcessesForDatasource?token={{Token}}&amp;dataSourceId={{dataSourceId}}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetProcessesForDatasource?token={{Token}}&amp;dataSourceId={{dataSourceId}}"</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cfff743a-ae7b-4262-bd6f-aa3800d8c374"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"MapId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PURCHASE DOCUMENTS"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Importing Purchase Documents"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"SourceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eOne.SmartConnect.Connectors.NAV.Odata.MsNavOdataDatasourceAssociation"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"TargetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eOne.SmartConnect.Connectors.Crm2011.MsCrm2011Destination"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='query-parameters-5'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>true</td>
+<td>Token generated by the GetToken endpoint</td>
+</tr>
+<tr>
+<td>dataSourceId</td>
+<td>true</td>
+<td>Unique id for the Data Source</td>
+</tr>
+</tbody></table>
 <h2 id='getmapcolumns'>GetMapColumns</h2>
+<p>This endpoint retrieves all columns defined in the data source of the process.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>https://{{API_Url}}/GetMapColumns</h6>
+    </div>
+</div>
+
 <blockquote>
 <p>To retrieve a list of columns defined in a process, use this code:</p>
 </blockquote>
@@ -617,11 +905,7 @@ Real-time data source maps will not show in this list.
         </span><span class="nl">"IsRequired"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint retrieves all columns defined in the data source of the process.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>POST {{API Url}}/GetMapColumns</code></p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+</span></code></pre></div><h3 id='query-parameters-6'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -641,6 +925,15 @@ Real-time data source maps will not show in this list.
 </tr>
 </tbody></table>
 <h2 id='getmappedmapcolumns'>GetMappedMapColumns</h2>
+<p>This endpoint retrieves all columns defined in the data source of the process.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>https://{{API_Url}}/GetMappedMapColumns</h6>
+    </div>
+</div>
+
 <blockquote>
 <p>To retrieve a list of columns mapped in the destination, use this code:</p>
 </blockquote>
@@ -676,11 +969,7 @@ Real-time data source maps will not show in this list.
         </span><span class="nl">"IsRequired"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint retrieves all columns defined in the data source of the process.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>POST {{API Url}}/GetMappedMapColumns</code></p>
-<h3 id='query-parameters-3'>Query Parameters</h3>
+</span></code></pre></div><h3 id='query-parameters-7'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -704,6 +993,15 @@ Real-time data source maps will not show in this list.
 
 <aside class="warning">You will not be able to get data from real-time data source maps.</aside>
 <h2 id='getalldata'>GetAllData</h2>
+<p>This endpoint retrieves the current defined source for the specified process.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>https://{{API_Url}}/GetAllData</h6>
+    </div>
+</div>
+
 <blockquote>
 <p>To retrieve currently defined source data, use this code:</p>
 </blockquote>
@@ -738,11 +1036,7 @@ Real-time data source maps will not show in this list.
     <span class="ni">&amp;lt;</span>Currency<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[CAD$]]<span class="ni">&amp;gt;&amp;lt;</span>/Currency<span class="ni">&amp;gt;&amp;#xD;</span>
   <span class="ni">&amp;lt;</span>/Table01<span class="ni">&amp;gt;&amp;#xD;</span>
 <span class="ni">&amp;lt;</span>/MyDataSet<span class="ni">&amp;gt;</span><span class="nt">&lt;/string&gt;</span>
-</code></pre></div>
-<p>This endpoint retrieves the current defined source for the specified process.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>POST {{API Url}}/GetAllData</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+</code></pre></div><h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -764,6 +1058,15 @@ Real-time data source maps will not show in this list.
 
 <aside class="warning">Currently this endpoint only returns data as XML</aside>
 <h2 id='getalldatawithvariables'>GetAllDataWithVariables</h2>
+<p>This endpoint retrieves the current defined source for the specified process. If the data source is using Global Variables in the query, the values passed in the body will be applied as filters prior to retrieving the data.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>https://{{API_Url}}/GetAllDataWithVariables</h6>
+    </div>
+</div>
+
 <blockquote>
 <p>To retrieve currently defined source with Global Variable filters, use this code:</p>
 </blockquote>
@@ -819,11 +1122,7 @@ Real-time data source maps will not show in this list.
     <span class="ni">&amp;lt;</span>Currency<span class="ni">&amp;gt;&amp;lt;</span>![CDATA[CAD$]]<span class="ni">&amp;gt;&amp;lt;</span>/Currency<span class="ni">&amp;gt;&amp;#xD;</span>
   <span class="ni">&amp;lt;</span>/Table01<span class="ni">&amp;gt;&amp;#xD;</span>
 <span class="ni">&amp;lt;</span>/MyDataSet<span class="ni">&amp;gt;</span><span class="nt">&lt;/string&gt;</span>
-</code></pre></div>
-<p>This endpoint retrieves the current defined source for the specified process. If the data source is using Global Variables in the query, the values passed in the body will be applied as filters prior to retrieving the data.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>POST {{API Url}}/GetAllDataWithVariables</code></p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+</code></pre></div><h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
