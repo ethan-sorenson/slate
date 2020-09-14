@@ -18,6 +18,17 @@ ErrorMessage | string | Last Error Message from the run
 
 ## RunMap
 
+This endpoint runs the specified Integration Process.
+
+### HTTP Request
+
+<div class="api-endpoint">
+	<div class="endpoint-data">
+		<i class="label label-get">POST</i>
+		<h6>https://{{API_Url}}/runmap</h6>
+	</div>
+</div>
+
 > To run a specified process, use this code:
 
 ```shell
@@ -94,13 +105,6 @@ print(response.text.encode('utf8'))
     </ErrorTable>\r\n
 </NewDataSet>
 ```
-
-This endpoint runs the specified process.
-
-### HTTP Request
-
-`POST {{API Url}}/runmap?token={{Token}}&mapKey={{mapKey}}`
-
 ### Query Parameters
 
 Parameter | Required | Description
@@ -112,6 +116,17 @@ mapKey | true | Unique identifier for the process to retrieve
 <aside class="warning">Currently this endpoint only returns the errors as an XML data table</aside>
 
 ## RunMapWithVariables
+
+This endpoint runs the specified process. If the process is using Global Variables, then the default value for those variables can be provided in the body of the request.
+
+### HTTP Request
+
+<div class="api-endpoint">
+	<div class="endpoint-data">
+		<i class="label label-get">POST</i>
+		<h6>https://{{API_Url}}/RunMapWithVariables</h6>
+	</div>
+</div>
 
 > To run a specified process and provide Global Variables, use this code:
 
@@ -210,13 +225,6 @@ print(response.text.encode('utf8'))
     </ErrorTable>\r\n
 </NewDataSet>
 ```
-
-This endpoint runs the specified process. If the process is using Global Variables, then the default value for those variables can be provided in the body of the request.
-
-### HTTP Request
-
-`POST {{API Url}}/RunMapWithVariables?token={{Token}}&mapKey={{mapKey}}`
-
 ### Query Parameters
 
 Parameter | Required | Description
@@ -228,6 +236,17 @@ mapKey | true | Unique identifier for the process to retrieve
 <aside class="warning">Currently this endpoint only returns the errors as an XML data table</aside>
 
 ## RunMapDataTable
+
+This endpoint runs the specified process with the provided XML data table.
+
+### HTTP Request
+
+<div class="api-endpoint">
+	<div class="endpoint-data">
+		<i class="label label-get">POST</i>
+		<h6>https://{{API_Url}}/RunMapDataTable</h6>
+	</div>
+</div>
 
 > To run a specified process with provided source data, use this code:
 
@@ -282,12 +301,6 @@ print(response.text.encode('utf8'))
     "ErrorMessage": "Document was not sent due to document errors."
 ```
 
-This endpoint runs the specified process with the provided XML data table.
-
-### HTTP Request
-
-`POST {{API Url}}/RunMapDataTable?token={{Token}}&mapKey={{mapKey}}`
-
 ### Query Parameters
 
 Parameter | Required | Description
@@ -299,6 +312,16 @@ mapKey | true | Unique identifier for the process to retrieve
 <aside class="warning">Currently this endpoint only returns the errors as an XML data table</aside>
 
 ## RunMapDataTableWithErrors
+This endpoint runs the specified process with the provided XML data table, and returns error messages.
+
+### HTTP Request
+
+<div class="api-endpoint">
+	<div class="endpoint-data">
+		<i class="label label-get">POST</i>
+		<h6>https://{{API_Url}}/RunMapDataTableWithErrors</h6>
+	</div>
+</div>
 
 > To run a specified process with provided source data, use this code:
 
@@ -393,12 +416,6 @@ print(response.text.encode('utf8'))
 </NewDataSet>
 ```
 
-This endpoint runs the specified process with the provided XML data table, and returns error messages.
-
-### HTTP Request
-
-`POST {{API Url}}/RunMapDataTableWithErrors?token={{Token}}&mapKey={{mapKey}}`
-
 ### Query Parameters
 
 Parameter | Required | Description
@@ -410,6 +427,15 @@ mapKey | true | Unique identifier for the process to retrieve
 <aside class="warning">Currently this endpoint only returns the errors as an XML data table</aside>
 
 ## RunMapXml
+This endpoint runs the specified process with the provided XML encoded data table, and returns error messages.
+
+### HTTP Request
+<div class="api-endpoint">
+	<div class="endpoint-data">
+		<i class="label label-get">POST</i>
+		<h6>https://{{API_Url}}/RunMapXml</h6>
+	</div>
+</div>
 
 > To run a specified process and provide Global Variables, use this code:
 
@@ -509,13 +535,6 @@ print(response.text.encode('utf8'))
     </ErrorTable>\r\n
 </NewDataSet>
 ```
-
-This endpoint runs the specified process with the provided XML encoded data table, and returns error messages.
-
-### HTTP Request
-
-`POST {{API Url}}/RunMapXml?token={{Token}}&mapKey={{mapKey}}`
-
 ### Query Parameters
 
 Parameter | Required | Description
