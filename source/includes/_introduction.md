@@ -1,17 +1,19 @@
 # Introduction
 
-Welcome to the SmartConnect API! The API can be used to remotely interact with the SmartConnect. Some of the core functions are:
+### Welcome to the SmartConnect API!
+
+The API can be used to remotely interact with the SmartConnect. Some of the core functions are:
 
 * Request data from a pre-defined SmartConnect Data Source Query
-* Run an integration
+* Run an Integration Process
 * Retrieve Errors from SmartConnect
 
 ## Requirements
 
 To use this version of the REST API you will need the following:
 
-* An active SaaS subscription for SmartConnect.com
-* A valid user login to SmartConnect.com
+* An active SaaS subscription for [SmartConnect.com](https://smartconnect.com/)
+* A valid user login to [SmartConnect.com](https://smartconnect.com/Account/Login)
 
 ## Getting Started
 

@@ -14,7 +14,7 @@ This endpoint retrieves all configured connections.
 	</div>
 </div>
 
-> To retrieve a list of connrctions, use this code:
+> To retrieve a list of connections, use this code:
 
 ```shell
 curl GET "{{API Url}}/GetConnections?token={{Token}}" \

@@ -81,7 +81,7 @@ This endpoint retrieves the error messages from a specified process run.
 	</div>
 </div>
 
-> To retrieve a list of process runs, use this code:
+> To retrieve a list of process errors for a prpcess run, use this code:
 
 ```shell
 curl GET "{{API Url}}/GetErrorsForProcessRun?token={{Token}}&processId={{processId}}&runNumber={{runNumber}}" \
@@ -171,7 +171,7 @@ If the option to "Export Processing Errors as" is set to "Save as CSV/XML" on th
 	</div>
 </div>
 
-> To retrieve a list of process runs, use this code:
+> To retrieve a list of process outputs, use this code:
 
 ```shell
 curl GET "{{API Url}}/GetOutputsForProcess?token={{Token}}&processId={{processId}}" \
