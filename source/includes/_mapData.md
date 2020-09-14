@@ -6,6 +6,17 @@ The Map Data endpoints can be used to retrieve data from the data source defined
 
 ## GetAllData
 
+This endpoint retrieves the current defined source for the specified process.
+
+### HTTP Request
+
+<div class="api-endpoint">
+	<div class="endpoint-data">
+		<i class="label label-get">POST</i>
+		<h6>https://{{API_Url}}/GetAllData</h6>
+	</div>
+</div>
+
 > To retrieve currently defined source data, use this code:
 
 ```shell
@@ -45,13 +56,6 @@ print(response.text.encode('utf8'))
   &lt;/Table01&gt;&#xD;
 &lt;/MyDataSet&gt;</string>
 ```
-
-This endpoint retrieves the current defined source for the specified process.
-
-### HTTP Request
-
-`POST {{API Url}}/GetAllData`
-
 ### Query Parameters
 
 Parameter | Required | Description
@@ -63,6 +67,18 @@ mapKey | true | Unique identifier for the process to retrieve
 <aside class="warning">Currently this endpoint only returns data as XML</aside>
 
 ## GetAllDataWithVariables
+
+This endpoint retrieves the current defined source for the specified process. If the data source is using Global Variables in the query, the values passed in the body will be applied as filters prior to retrieving the data.
+
+### HTTP Request
+
+<div class="api-endpoint">
+	<div class="endpoint-data">
+		<i class="label label-get">POST</i>
+		<h6>https://{{API_Url}}/GetAllDataWithVariables</h6>
+	</div>
+</div>
+
 
 > To retrieve currently defined source with Global Variable filters, use this code:
 
@@ -124,13 +140,6 @@ print(response.text.encode('utf8'))
   &lt;/Table01&gt;&#xD;
 &lt;/MyDataSet&gt;</string>
 ```
-
-This endpoint retrieves the current defined source for the specified process. If the data source is using Global Variables in the query, the values passed in the body will be applied as filters prior to retrieving the data.
-
-### HTTP Request
-
-`POST {{API Url}}/GetAllDataWithVariables`
-
 ### Query Parameters
 
 Parameter | Required | Description
