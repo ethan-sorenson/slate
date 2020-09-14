@@ -32,7 +32,13 @@ The GetToken endpoint requires 3 parameters. To generate a token.
 ```
 
 ### HTTP Request
-`POST {{API Url}}/GetToken`
+
+<div class="api-endpoint">
+	<div class="endpoint-data">
+		<i class="label label-get">POST</i>
+		<h6>https://{{API Url}}/GetToken</h6>
+	</div>
+</div>
 
 ### Query Parameters
 
