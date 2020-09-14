@@ -12,7 +12,7 @@ This endpoint retrieves the current defined source for the specified process.
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
-		<i class="label label-get">POST</i>
+		<i class="label label-post">POST</i>
 		<h6>https://{{API_Url}}/GetAllData</h6>
 	</div>
 </div>
@@ -74,7 +74,7 @@ This endpoint retrieves the current defined source for the specified process. If
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
-		<i class="label label-get">POST</i>
+		<i class="label label-post">POST</i>
 		<h6>https://{{API_Url}}/GetAllDataWithVariables</h6>
 	</div>
 </div>

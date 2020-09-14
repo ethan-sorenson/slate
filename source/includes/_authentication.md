@@ -14,7 +14,7 @@ The GetToken endpoint requires 3 parameters. To generate a token.
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
-		<i class="label label-get">POST</i>
+		<i class="label label-post">POST</i>
 		<h6>https://{{API_Url}}/GetToken</h6>
 	</div>
 </div>
@@ -56,7 +56,7 @@ The Validate endpoint will return a Boolean to inform the client whether the tok
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
-		<i class="label label-get">POST</i>
+		<i class="label label-post">POST</i>
 		<h6>https://{{API_Url}}/validate</h6>
 	</div>
 </div>

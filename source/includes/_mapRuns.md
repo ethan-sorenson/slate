@@ -24,7 +24,7 @@ This endpoint runs the specified Integration Process.
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
-		<i class="label label-get">POST</i>
+		<i class="label label-post">POST</i>
 		<h6>https://{{API_Url}}/runmap</h6>
 	</div>
 </div>
@@ -123,7 +123,7 @@ This endpoint runs the specified process. If the process is using Global Variabl
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
-		<i class="label label-get">POST</i>
+		<i class="label label-post">POST</i>
 		<h6>https://{{API_Url}}/RunMapWithVariables</h6>
 	</div>
 </div>
@@ -243,7 +243,7 @@ This endpoint runs the specified process with the provided XML data table.
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
-		<i class="label label-get">POST</i>
+		<i class="label label-post">POST</i>
 		<h6>https://{{API_Url}}/RunMapDataTable</h6>
 	</div>
 </div>
@@ -318,7 +318,7 @@ This endpoint runs the specified process with the provided XML data table, and r
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
-		<i class="label label-get">POST</i>
+		<i class="label label-post">POST</i>
 		<h6>https://{{API_Url}}/RunMapDataTableWithErrors</h6>
 	</div>
 </div>
@@ -432,7 +432,7 @@ This endpoint runs the specified process with the provided XML encoded data tabl
 ### HTTP Request
 <div class="api-endpoint">
 	<div class="endpoint-data">
-		<i class="label label-get">POST</i>
+		<i class="label label-post">POST</i>
 		<h6>https://{{API_Url}}/RunMapXml</h6>
 	</div>
 </div>

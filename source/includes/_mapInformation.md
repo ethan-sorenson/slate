@@ -125,7 +125,7 @@ This endpoint retrieves all processes that can be used by the SmartConnect API.
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
-		<i class="label label-get">POST</i>
+		<i class="label label-post">POST</i>
 		<h6>https://{{API_Url}}/GetMapList</h6>
 	</div>
 </div>
@@ -315,7 +315,7 @@ This endpoint retrieves all columns defined in the data source of the process.
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
-		<i class="label label-get">POST</i>
+		<i class="label label-post">POST</i>
 		<h6>https://{{API_Url}}/GetMapColumns</h6>
 	</div>
 </div>
@@ -375,7 +375,7 @@ This endpoint retrieves all columns defined in the data source of the process.
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
-		<i class="label label-get">POST</i>
+		<i class="label label-post">POST</i>
 		<h6>https://{{API_Url}}/GetMappedMapColumns</h6>
 	</div>
 </div>
