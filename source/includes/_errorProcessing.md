@@ -155,10 +155,6 @@ runNumber | true | Run number to retrieve
 
 <aside class="warning">Currently this endpoint is limited to show the top 1000 errors</aside>
 
-# Error Processing
-
-The Error Processing endpoints can be used to retrieve errors and process outputs.
-
 ## GetOutputsForProcess
 This endpoint generates a link to download a process output.
 
