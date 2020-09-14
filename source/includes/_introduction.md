@@ -1,0 +1,30 @@
+# Introduction
+
+Welcome to the SmartConnect API! The API can be used to remotely interact with the SmartConnect. Some of the core functions are:
+
+* Request data from a pre-defined SmartConnect Data Source Query
+* Run an integration
+* Retrieve Errors from SmartConnect
+
+## Requirements
+
+To use this version of the REST API you will need the following:
+
+* An active SaaS subscription for SmartConnect.com
+* A valid user login to SmartConnect.com
+
+## Getting Started
+
+Connecting to the API will require the following information. The API Settings can be access in SmartConnect.com > System API Settings
+
+### Needed Variables
+
+Variable | Description
+--------- | -----------
+API Url | Base Url for accessing the SmartConnect API.
+Customer Id | Unique identifier for your SmartConnect tenant.
+Username | The email address of a user with access to the SmartConnect tenant.
+Password | Password the user uses to access the SmartConnect.com application.
+
+
+![Image of API Settings](https://www.eonesolutions.com/wp-content/uploads/2020/01/API_Details.png)
