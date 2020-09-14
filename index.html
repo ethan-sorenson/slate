@@ -311,6 +311,9 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#welcome-to-the-smartconnect-api" class="toc-h2 toc-link" data-title="Welcome to the SmartConnect API!">Welcome to the SmartConnect API!</a>
+                  </li>
+                  <li>
                     <a href="#requirements" class="toc-h2 toc-link" data-title="Requirements">Requirements</a>
                   </li>
                   <li>
@@ -412,20 +415,20 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the SmartConnect API! The API can be used to remotely interact with the SmartConnect. Some of the core functions are:</p>
+        <h1 id='introduction'>Introduction</h1><h3 id='welcome-to-the-smartconnect-api'>Welcome to the SmartConnect API!</h3>
+<p>The API can be used to remotely interact with the SmartConnect. Some of the core functions are:</p>
 
 <ul>
 <li>Request data from a pre-defined SmartConnect Data Source Query</li>
-<li>Run an integration</li>
+<li>Run an Integration Process</li>
 <li>Retrieve Errors from SmartConnect</li>
 </ul>
 <h2 id='requirements'>Requirements</h2>
 <p>To use this version of the REST API you will need the following:</p>
 
 <ul>
-<li>An active SaaS subscription for SmartConnect.com</li>
-<li>A valid user login to SmartConnect.com</li>
+<li>An active SaaS subscription for <a href="https://smartconnect.com/">SmartConnect.com</a></li>
+<li>A valid user login to <a href="https://smartconnect.com/Account/Login">SmartConnect.com</a></li>
 </ul>
 <h2 id='getting-started'>Getting Started</h2>
 <p>Connecting to the API will require the following information. The API Settings can be access in SmartConnect.com &gt; System API Settings</p>
@@ -564,7 +567,7 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 </div>
 
 <blockquote>
-<p>To retrieve a list of connrctions, use this code:</p>
+<p>To retrieve a list of connections, use this code:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl GET <span class="s2">"{{API Url}}/GetConnections?token={{Token}}"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
@@ -1836,7 +1839,7 @@ Real-time data source maps will not show in this list.
 </div>
 
 <blockquote>
-<p>To retrieve a list of process runs, use this code:</p>
+<p>To retrieve a list of process errors for a prpcess run, use this code:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl GET <span class="s2">"{{API Url}}/GetErrorsForProcessRun?token={{Token}}&amp;processId={{processId}}&amp;runNumber={{runNumber}}"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
@@ -1935,7 +1938,7 @@ If the option to "Export Processing Errors as" is set to "Save as CSV/XML" on th
 </div>
 
 <blockquote>
-<p>To retrieve a list of process runs, use this code:</p>
+<p>To retrieve a list of process outputs, use this code:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl GET <span class="s2">"{{API Url}}/GetOutputsForProcess?token={{Token}}&amp;processId={{processId}}"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
