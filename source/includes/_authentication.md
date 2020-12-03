@@ -7,7 +7,7 @@ The password will need to be encrypted using RSA encrytion using [the PKCS #1 st
 Tokens are company specific and are valid for 3 months. If your username has access to multiple companies, you will need to generate a separate token for each company.
 </aside>
 
-### HTTP Request
+### Password Encryption
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
@@ -57,6 +57,7 @@ def get_encrypted_password(password):
 ```json
 "Bqr+OK0r4f8gURRCt3RCmxfem2PF2lE5lMIZ2ZsOEu9rDmEk93wuFrFIRFPLX4Wm8HDq7HgNn/mj7TT18uQj1UpqFVoizQLs6TWgLLUdqjxqeTFamvJaAVUh392tsQDTgkHkU4UwB8MABay2lr987GJIUDd4MaC2Aj11t8XjaXCU="
 ```
+![increment](//jsfiddle.net/ethan_sorenson/t0zhrq4v/65/embed/js,html,css,result/dark/>)
 
 ## GetCompanies
 
