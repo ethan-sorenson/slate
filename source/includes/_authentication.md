@@ -52,12 +52,33 @@ def get_encrypted_password(password):
     return base64.b64encode(encrypted).decode()
 ```
 
+```javascript
+function encode_password() {
+  var password = "mypassword";
+  var n = "vYofWQ63vYJZTB/EW4NT5LMlfiB5LftMMQSbJgFHvfE+Z8AXnCLNplBByGLWBLMolSwJZjJdUN5gLF0V/Q9aVwOK5GWAezt8IPwMYqAgwQ2btnlhrsKLkKoTtogGj9MYz9briYn/DHZlW56aOYvwSoz1LYhnoja59cG2UvIXxVE=";
+  var e = "AQAB";
+  var rsa = forge.pki.rsa;
+  var BigInteger = forge.jsbn.BigInteger;
+
+  function parseBigInteger(b64) {
+    return new BigInteger(forge.util.createBuffer(forge.util.decode64(b64)).toHex(), 16);
+   }
+  var pubKey = rsa.setPublicKey(parseBigInteger(n), parseBigInteger(e));
+  var encryptedData = pubKey.encrypt(password, 'RSAES-PKCS1-V1_5');
+  document.write('Encrypted Password: ' + btoa(encryptedData) +
+  '<br>Unencrypted Password: ' + encodeURIComponent(btoa(encryptedData)));
+}
+```
+
+```csharp
+check other languages
+```
+
 > The above command returns a string:
 
 ```json
 "Bqr+OK0r4f8gURRCt3RCmxfem2PF2lE5lMIZ2ZsOEu9rDmEk93wuFrFIRFPLX4Wm8HDq7HgNn/mj7TT18uQj1UpqFVoizQLs6TWgLLUdqjxqeTFamvJaAVUh392tsQDTgkHkU4UwB8MABay2lr987GJIUDd4MaC2Aj11t8XjaXCU="
 ```
-![increment](//jsfiddle.net/ethan_sorenson/t0zhrq4v/65/embed/js,html,css,result/dark/>)
 
 ## GetCompanies
 
