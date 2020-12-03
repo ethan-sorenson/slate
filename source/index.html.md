@@ -4,8 +4,7 @@ title: SmartConnect REST API Documentation
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell: cUrl
   - python: Python
-  - javascript: JavaScript
-  - csharp: C
+
 
 
 toc_footers:
