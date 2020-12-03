@@ -2,7 +2,7 @@
 
 ### Welcome to the SmartConnect API!
 
-The API can be used to remotely interact with the SmartConnect. Some of the core functions are:
+The API can be used to remotely interact with SmartConnect. Some of the core functions are:
 
 * Request data from a pre-defined SmartConnect Data Source Query
 * Run an Integration Process
@@ -18,6 +18,10 @@ To use this version of the REST API you will need the following:
 ## Getting Started
 
 Connecting to the API will require the following information. The API Settings can be access in SmartConnect.com > System API Settings
+
+<aside class="notice">
+A Postman collection with examples can be [downloaded here](https://www.eonesolutions.com/wp-content/uploads/2020/01/SmartConnect.com-Web-Service-Collection.zip)
+</aside>
 
 ### Needed Variables
 
