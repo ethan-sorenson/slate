@@ -7,7 +7,9 @@ The password will need to be encrypted using RSA encrytion using [the PKCS #1 st
 Tokens are company specific and are valid for 3 months. If your username has access to multiple companies, you will need to generate a separate token for each company.
 </aside>
 
-### Password Encryption
+## Password Encryption
+
+### HTTP Request
 
 <div class="api-endpoint">
 	<div class="endpoint-data">
