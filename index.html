@@ -325,6 +325,12 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#http-request" class="toc-h2 toc-link" data-title="HTTP Request">HTTP Request</a>
+                  </li>
+                  <li>
+                    <a href="#getcompanies" class="toc-h2 toc-link" data-title="GetCompanies">GetCompanies</a>
+                  </li>
+                  <li>
                     <a href="#gettoken" class="toc-h2 toc-link" data-title="GetToken">GetToken</a>
                   </li>
                   <li>
@@ -416,7 +422,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1><h3 id='welcome-to-the-smartconnect-api'>Welcome to the SmartConnect API!</h3>
-<p>The API can be used to remotely interact with the SmartConnect. Some of the core functions are:</p>
+<p>The API can be used to remotely interact with SmartConnect. Some of the core functions are:</p>
 
 <ul>
 <li>Request data from a pre-defined SmartConnect Data Source Query</li>
@@ -432,6 +438,10 @@
 </ul>
 <h2 id='getting-started'>Getting Started</h2>
 <p>Connecting to the API will require the following information. The API Settings can be access in SmartConnect.com &gt; System API Settings</p>
+
+<aside class="notice">
+A Postman collection with examples can be [downloaded here](https://www.eonesolutions.com/wp-content/uploads/2020/01/SmartConnect.com-Web-Service-Collection.zip)
+</aside>
 <h3 id='needed-variables'>Needed Variables</h3>
 <table><thead>
 <tr>
@@ -459,14 +469,145 @@
 
 <p><img src="https://www.eonesolutions.com/wp-content/uploads/2020/01/API_Details.png" alt="Image of API Settings" /></p>
 <h1 id='authentication'>Authentication</h1>
-<p>SmartConnect requires a URL parameter with a token for authorization. A token will need to be requested from the server prior to calling any other endpoints.</p>
+<p>SmartConnect requires the user email, password, and companyId to generate a token.
+The password will need to be encrypted using RSA encrytion using <a href="https://en.wikipedia.org/wiki/PKCS_1">the PKCS #1 standard</a>.</p>
 
 <aside class="notice">
 Tokens are company specific and are valid for 3 months. If your username has access to multiple companies, you will need to generate a separate token for each company.
 </aside>
-<h2 id='gettoken'>GetToken</h2>
-<p>The GetToken endpoint requires 3 parameters. To generate a token.</p>
 <h3 id='http-request'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-post">POST</i>
+        <h6>https://login.smartconnect.com/v1/public-key</h6>
+    </div>
+</div>
+
+<blockquote>
+<p>To encrypt the password, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>check other languages
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">get_encrypted_password</span><span class="p">(</span><span class="n">password</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="n">ElementTree</span>
+    <span class="kn">from</span> <span class="nn">Crypto.PublicKey.RSA</span> <span class="kn">import</span> <span class="n">construct</span>
+    <span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">PKCS1_v1_5</span>
+    <span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64decode</span>
+    <span class="kn">import</span> <span class="nn">base64</span>
+    <span class="kn">import</span> <span class="nn">requests</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">password</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+
+    <span class="c1">#get public key 
+</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://login.smartconnect.com/v1/public-key'</span><span class="p">)</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'"'</span><span class="p">,</span><span class="s">''</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">ElementTree</span><span class="p">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="c1"># decode base64 string to be used as modulus(n) and exponent(e) components
+</span>    <span class="n">modulus</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">exponent</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">modulus</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s">'big'</span><span class="p">)</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s">'big'</span><span class="p">)</span>
+
+    <span class="n">pubkey</span> <span class="o">=</span> <span class="n">construct</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+    <span class="n">pubkey</span> <span class="o">=</span> <span class="n">PKCS1_v1_5</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">pubkey</span><span class="p">)</span>
+    <span class="n">encrypted</span> <span class="o">=</span> <span class="n">pubkey</span><span class="p">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+
+    <span class="c1"># base64 encode the bytes
+</span>    <span class="k">return</span> <span class="n">base64</span><span class="p">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">encrypted</span><span class="p">).</span><span class="n">decode</span><span class="p">()</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns a string:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="s2">"Bqr+OK0r4f8gURRCt3RCmxfem2PF2lE5lMIZ2ZsOEu9rDmEk93wuFrFIRFPLX4Wm8HDq7HgNn/mj7TT18uQj1UpqFVoizQLs6TWgLLUdqjxqeTFamvJaAVUh392tsQDTgkHkU4UwB8MABay2lr987GJIUDd4MaC2Aj11t8XjaXCU="</span><span class="w">
+</span></code></pre></div><h2 id='getcompanies'>GetCompanies</h2>
+<p>Optionally you can retrieve a list of companies with the companies endpoint.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-post">POST</i>
+        <h6>https://login.smartconnect.com/v1/companies</h6>
+    </div>
+</div>
+
+<blockquote>
+<p>To generate a token, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"https://login.smartconnect.com/v1/companies"</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
+  <span class="nt">-d</span> <span class="s1">'{
+    "Email": "demo.user@eonesolutions.com",
+    "Password":"Ua4r0AK8f5xuLeFGhmBtg0SP9cXYT+YUDAMbNKZ53VHAN3lQIoOTue4bIhAs+G2dPloF++5rOcDOmVhKaeAyrfQhIDw/1sHH0k90H2ubTGDCJ0zK3ewfXDXY2y3c8q6f7XShgVthACHNOpMV7BZXn2kDGQRR1WWHwJw4zBG+bGw=",
+    "ClientName": "Python",
+    "IpAddress": "127.0.0.1"
+    }'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://login.smartconnect.com/v1/companies"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">({</span><span class="s">"Email"</span><span class="p">:{{</span><span class="n">email</span><span class="p">}},</span><span class="s">"Password"</span><span class="p">:</span><span class="n">get_encrypted_password</span><span class="p">({{</span><span class="n">password</span><span class="p">}}),</span><span class="s">"ClientName"</span><span class="p">:</span><span class="s">"Python"</span><span class="p">,</span><span class="s">"IpAddress"</span><span class="p">:</span><span class="s">"127.0.0.1"</span><span class="p">})</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span> <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="c1">#Format and print response
+</span><span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns a string:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"UserId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57c5d9c3-4af6-4e46-a553-44u62235a9ff"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo.user@eonesolutions.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Active"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ChangePasswordAtLogin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"EmailVerified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"ProductId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8de68f74-9162-4973-84a3-43c8673d0d80"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SmartConnect"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"ProductStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Active"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Active"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Administrator"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"RegionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"41360865-b555-419f-80bf-1484b2719e36"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"RegionName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"North Central US"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"AccountProductUserId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1fc363a3-a01c-4398-bb85-aca78809a621"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"AccountProductId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fb60defa-6bae-4fa8-b164-c8b06f3fac3d"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"AccountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72b01219-a6a4-4e25-8d93-58d0584bf75f"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Demo Account"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"EQA"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Active"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"Subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"AccountProductSubscriptionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"652fa33c-d971-4ed7-a52f-3c8ca3ff1737"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Expired"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"HasSupport"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"AdditionalConnections"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"SubscriptionEndDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-11-20T00:00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"Plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"SubscriptionPlanId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8215427c-fab9-4c26-ae97-244b4d8512af"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SmartConnect Professional"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"ConnectionCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"HasSupport"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"PerpetualLicense"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Active"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"ExpiredString"</span><span class="p">:</span><span class="w"> </span><span class="s2">" - inactive subscription"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"Expired"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"Instances"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nl">"WebClientUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"appeqa.smartconnect.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"ApiUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"smartconnect-na-scheduler.azurewebsites.net/API"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"ConnectionCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"AccountProductStatusString"</span><span class="p">:</span><span class="w"> </span><span class="s2">" - inactive subscription"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='gettoken'>GetToken</h2>
+<p>The GetToken endpoint requires 3 parameters. To generate a token.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-post">POST</i>
@@ -516,7 +657,7 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 </tbody></table>
 <h2 id='validate'>Validate</h2>
 <p>The Validate endpoint will return a Boolean to inform the client whether the token is valid or not.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-post">POST</i>
