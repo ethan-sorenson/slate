@@ -51,7 +51,7 @@ def get_encrypted_password(password):
     encrypted = pubkey.encrypt(password)
 
     # base64 encode the bytes
-    return base64.b64encode(encrypted).decode()
+    encoded = base64.b64encode(encrypted).decode()
 ```
 > The above command returns a string:
 
