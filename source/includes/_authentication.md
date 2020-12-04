@@ -9,6 +9,11 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 
 ## Password Encryption
 
+Password encryption will be required prior to sending the requests for "GetCompanies" and "GetToken".
+Encryption will require the most recent public-key containing the RSA module and exponent.
+
+If you want to quickly encrypt your password for testing, [it can be done here](https://jsfiddle.net/ethan_sorenson/t0zhrq4v/).
+
 ### HTTP Request
 
 <div class="api-endpoint">
@@ -53,7 +58,39 @@ def get_encrypted_password(password):
     # base64 encode the bytes
     print(base64.b64encode(encrypted).decode())
 ```
-> The above command returns a string:
+
+```javascript
+function encryptPassword() {
+  var password = 'my password';
+  var n = 'vYofWQ63vYJZTB/EW4NT5LMlfiB5LftMMQSbJgFHvfE+Z8AXnCLNplBByGLWBLMolSwJZjJdUN5gLF0V/Q9aVwOK5GWAezt8IPwMYqAgwQ2btnlhrsKLkKoTtogGj9MYz9briYn/DHZlW56aOYvwSoz1LYhnoja59cG2UvIXxVE=';
+  var e = 'AQAB';
+  var rsa = forge.pki.rsa;
+  var BigInteger = forge.jsbn.BigInteger;
+
+  function parseBigInteger(b64) {
+    return new BigInteger(forge.util.createBuffer(forge.util.decode64(b64)).toHex(), 16);
+   }
+  var pubKey = rsa.setPublicKey(parseBigInteger(n), parseBigInteger(e));
+  var encryptedData = pubKey.encrypt(document.getElementById(password).value, 'RSAES-PKCS1-V1_5');
+  // write output
+  document.write('Encrypted Password: ' + btoa(encryptedData) +
+  '<br>Unencrypted Password: ' + encodeURIComponent(btoa(encryptedData)));
+}
+```
+```csharp
+check other languages
+```
+
+> A request for the public key will return an xml payload:
+
+```xml
+<RSAKeyValue>
+    <Modulus>vYofWQ63vYJZTB/EW4NT5LMlfiB5LftMMQSbJgFHvfE+Z8AXnCLNplBByGLWBLMolSwJZjJdUN5gLF0V/Q9aVwOK5GWAezt8IPwMYqAgwQ2btnlhrsKLkKoTtogGj9MYz9briYn/DHZlW56aOYvwSoz1LYhnoja59cG2UvIXxVE=</Modulus>
+    <Exponent>AQAB</Exponent>
+</RSAKeyValue>
+```
+
+> An encrypted password will look like this:
 
 ```json
 "Bqr+OK0r4f8gURRCt3RCmxfem2PF2lE5lMIZ2ZsOEu9rDmEk93wuFrFIRFPLX4Wm8HDq7HgNn/mj7TT18uQj1UpqFVoizQLs6TWgLLUdqjxqeTFamvJaAVUh392tsQDTgkHkU4UwB8MABay2lr987GJIUDd4MaC2Aj11t8XjaXCU="
@@ -61,7 +98,12 @@ def get_encrypted_password(password):
 
 ## GetCompanies
 
-Optionally you can retrieve a list of companies with the companies endpoint.
+Optionally, you can retrieve a list of companies with the companies endpoint.
+This will return the CustomerId the same as shown in the SmartConnect client.
+
+<aside class="notice">
+When calling the GetCompanies endpoint, don't use an encrypted password, it should end with '='
+</aside>
 
 ### HTTP Request
 
@@ -72,7 +114,7 @@ Optionally you can retrieve a list of companies with the companies endpoint.
 	</div>
 </div>
 
-> To generate a token, use this code:
+> To retrieve a list of companies, use this code:
 
 ```shell
 curl POST "https://login.smartconnect.com/v1/companies"
@@ -156,6 +198,10 @@ print(json.dumps(json.loads(response.text), indent=4, sort_keys=True))
 ## GetToken
 
 The GetToken endpoint requires 3 parameters. To generate a token.
+
+<aside class="notice">
+When calling the GetToken endpoint make sure the encrypted password is URI encoded, it should end with '%3D'
+</aside>
 
 ### HTTP Request
 
