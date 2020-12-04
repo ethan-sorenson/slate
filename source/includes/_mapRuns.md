@@ -50,6 +50,13 @@ response = requests.request("POST", url, headers=headers)
 
 print(response.text.encode('utf8'))
 ```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
+```
 
 > The above command returns JSON structured like this:
 
@@ -170,6 +177,13 @@ response = requests.request("POST", url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
 ```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
+```
 
 > The above command returns JSON structured like this:
 
@@ -280,10 +294,16 @@ payload =
     </Table> 
   </RequestData>
 "
-
 response = requests.request("POST", url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
+```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
 ```
 
 > The above command returns JSON structured like this:
@@ -355,10 +375,16 @@ payload =
     </Table> 
   </RequestData>
 "
-
 response = requests.request("POST", url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
+```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
 ```
 
 > The above command returns JSON structured like this:
@@ -475,10 +501,16 @@ payload =
 	  </Xml>
   </RequestData>
 "
-
 response = requests.request("POST", url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
+```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
 ```
 
 > The above command returns JSON structured like this:

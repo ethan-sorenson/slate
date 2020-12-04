@@ -38,6 +38,13 @@ response = requests.request("POST", url, headers=headers)
 
 print(response.text.encode('utf8'))
 ```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
+```
 
 > The above command returns XML structured like this:
 
@@ -121,6 +128,13 @@ payload =
 response = requests.request("POST", url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
+```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
 ```
 
 > The above command returns XML structured like this:

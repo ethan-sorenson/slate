@@ -36,6 +36,14 @@ response = requests.request("GET", url, headers=headers)
 print(response.text.encode('utf8'))
 ```
 
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -101,6 +109,13 @@ headers = {
 response = requests.request("GET", url, headers=headers)
 
 print(response.text.encode('utf8'))
+```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
 ```
 
 > The above command returns JSON structured like this:
@@ -191,6 +206,13 @@ headers = {
 response = requests.request("GET", url, headers=headers)
 
 print(response.text.encode('utf8'))
+```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
 ```
 
 > The above command returns JSON structured like this:

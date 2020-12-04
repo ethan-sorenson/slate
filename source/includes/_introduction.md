@@ -19,8 +19,8 @@ To use this version of the REST API you will need the following:
 
 Connecting to the API will require the following information. The API Settings can be access in SmartConnect.com > System API Settings
 
-<aside class="notice">
-A Postman collection with examples can be [downloaded here](https://www.eonesolutions.com/wp-content/uploads/2020/01/SmartConnect.com-Web-Service-Collection.zip)
+<aside class="warning">
+If using JavaScript, note that the web service does not support [Cross-origin resource sharing (CORS)](https://www.eonesolutions.com/help-article/no-access-control-allow-origin-header-is-present-on-the-requested-resource/)
 </aside>
 
 ### Needed Variables
@@ -34,3 +34,7 @@ Password | Password the user uses to access the SmartConnect.com application.
 
 
 ![Image of API Settings](https://www.eonesolutions.com/wp-content/uploads/2020/01/API_Details.png)
+
+<aside class="notice">
+A Postman collection with examples can be [downloaded here](https://www.eonesolutions.com/wp-content/uploads/2020/01/SmartConnect.com-Web-Service-Collection.zip)
+</aside>

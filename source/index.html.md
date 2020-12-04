@@ -5,7 +5,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell: cUrl
   - python: Python
   - javascript: JavaScript
-  - chsarp: C#
+  - csharp: C#
 
 
 

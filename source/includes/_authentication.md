@@ -77,8 +77,29 @@ function encryptPassword() {
   '<br>Unencrypted Password: ' + encodeURIComponent(btoa(encryptedData)));
 }
 ```
+
 ```csharp
-check other languages
+string password = "my password";
+string rsaXml;
+System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.smartconnect.com/v1/public-key");
+request.Method = "POST";
+request.ContentLength = 0;
+System.Net.WebResponse response = request.GetResponse();
+
+using (System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+    {
+        string result = responseStream.ReadToEnd();
+	    rsaXml = result.Replace("\"","");
+    }
+
+using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider(1024))
+    {
+        RSA.FromXmlString(rsaXml);
+	    byte[] plainText = System.Text.Encoding.ASCII.GetBytes(password);
+        byte[] cipherbytes = RSA.Encrypt(plainText, System.Security.Cryptography.RSAEncryptionPadding.Pkcs1);
+	    // Message Box with encrypted password
+        MessageBox.Show(Convert.ToBase64String(cipherbytes));
+    }
 ```
 
 > A request for the public key will return an xml payload:
@@ -102,7 +123,7 @@ Optionally, you can retrieve a list of companies with the companies endpoint.
 This will return the CustomerId the same as shown in the SmartConnect client.
 
 <aside class="notice">
-When calling the GetCompanies endpoint, don't use an encrypted password, it should end with '='
+When calling the GetCompanies endpoint, use an RSA encoded password, it should end with '='
 </aside>
 
 ### HTTP Request
@@ -122,7 +143,7 @@ curl POST "https://login.smartconnect.com/v1/companies"
   -d '{
     "Email": "demo.user@eonesolutions.com",
     "Password":"Ua4r0AK8f5xuLeFGhmBtg0SP9cXYT+YUDAMbNKZ53VHAN3lQIoOTue4bIhAs+G2dPloF++5rOcDOmVhKaeAyrfQhIDw/1sHH0k90H2ubTGDCJ0zK3ewfXDXY2y3c8q6f7XShgVthACHNOpMV7BZXn2kDGQRR1WWHwJw4zBG+bGw=",
-    "ClientName": "Python",
+    "ClientName": "shell",
     "IpAddress": "127.0.0.1"
     }'
 ```
@@ -139,7 +160,32 @@ response = requests.post(url, data = payload, headers = headers)
 print(json.dumps(json.loads(response.text), indent=4, sort_keys=True))
 ```
 
-> The above command returns a string:
+```javascript
+coming soon...
+```
+
+```csharp
+string sendstring = "{\"Email\": \"demo.user@eonesolutions.com\",\"Password\":\"{{encrypedPassword}}\", \"ClientName\": \"C#\",\"IpAddress\": \"127.0.0.1\"\r\n}";
+System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.smartconnect.com/v1/companies");
+request.Method = "POST";
+request.ContentLength = sendstring.Length;
+request.ContentType = "application/json";
+using(Stream reqStream = request.GetRequestStream())
+{
+ reqStream.Write(Encoding.ASCII.GetBytes(sendstring),0,sendstring.Length);
+}
+System.Net.WebResponse response = request.GetResponse();
+
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
+```
+
+> The above command returns JSON structured like this:
 
 ```json
 {
@@ -200,7 +246,7 @@ print(json.dumps(json.loads(response.text), indent=4, sort_keys=True))
 The GetToken endpoint requires 3 parameters. To generate a token.
 
 <aside class="notice">
-When calling the GetToken endpoint make sure the encrypted password is URI encoded, it should end with '%3D'
+When calling the GetToken endpoint make sure the RSA encrypted password is URI encoded, it should end with '%3D'
 </aside>
 
 ### HTTP Request
@@ -226,6 +272,14 @@ url = "{{API Url}}/GetToken?email={{Username}}&password={{EncryptedPassword}}&co
 response = requests.request("POST", url)
 
 print(response.text.encode('utf8'))
+```
+
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
 ```
 
 > The above command returns a string:
@@ -269,6 +323,14 @@ response = requests.request("POST", url)
 
 print(response.text.encode('utf8'))
 ```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
+```
+
 > The above command returns a boolean:
 
 ```json

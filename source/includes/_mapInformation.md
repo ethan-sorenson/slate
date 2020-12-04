@@ -35,6 +35,13 @@ response = requests.request("GET", url, headers=headers)
 
 print(response.text.encode('utf8'))
 ```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
+```
 
 > The above command returns JSON structured like this:
 
@@ -90,6 +97,14 @@ headers = {
 response = requests.request("GET", url, headers=headers)
 
 print(response.text.encode('utf8'))
+```
+
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
 ```
 
 > The above command returns JSON structured like this:
@@ -151,6 +166,14 @@ response = requests.request("POST", url, headers=headers)
 
 print(response.text.encode('utf8'))
 ```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
+```
+
 
 > The above command returns JSON structured like this:
 
@@ -210,6 +233,14 @@ headers = {
 response = requests.request("GET", url, headers=headers)
 
 print(response.text.encode('utf8'))
+```
+
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
 ```
 
 > The above command returns JSON structured like this:
@@ -286,6 +317,13 @@ response = requests.request("GET", url, headers=headers)
 
 print(response.text.encode('utf8'))
 ```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
+```
 
 > The above command returns JSON structured like this:
 
@@ -341,6 +379,13 @@ response = requests.request("POST", url, headers=headers)
 
 print(response.text.encode('utf8'))
 ```
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
+```
 
 > The above command returns JSON structured like this:
 
@@ -369,7 +414,7 @@ mapKey | true | Unique identifier for the process to retrieve
 
 ## GetMappedMapColumns
 
-This endpoint retrieves all columns defined in the data source of the process.
+This endpoint retrieves all source columns mapped to the target of the process.
 
 ### HTTP Request
 
@@ -400,6 +445,14 @@ headers = {
 response = requests.request("POST", url, headers=headers)
 
 print(response.text.encode('utf8'))
+```
+
+```javascript
+coming soon...
+```
+
+```csharp
+coming soon...
 ```
 
 > The above command returns JSON structured like this:
