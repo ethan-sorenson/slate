@@ -301,8 +301,8 @@
         <div class="lang-selector">
               <a href="#" data-language-name="shell">cUrl</a>
               <a href="#" data-language-name="python">Python</a>
-              <a href="#" data-language-name="javascript">javaScript</a>
-              <a href="#" data-language-name="chsarp">C</a>
+              <a href="#" data-language-name="javascript">JavaScript</a>
+              <a href="#" data-language-name="chsarp">C#</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -477,7 +477,12 @@ The password will need to be encrypted using RSA encrytion using <a href="https:
 <aside class="notice">
 Tokens are company specific and are valid for 3 months. If your username has access to multiple companies, you will need to generate a separate token for each company.
 </aside>
-<h2 id='password-encryption'>Password Encryption</h2><h3 id='http-request'>HTTP Request</h3>
+<h2 id='password-encryption'>Password Encryption</h2>
+<p>Password encryption will be required prior to sending the requests for &quot;GetCompanies&quot; and &quot;GetToken&quot;.
+Encryption will require the most recent public-key containing the RSA module and exponent.</p>
+
+<p>If you want to quickly encrypt your password for testing, <a href="https://jsfiddle.net/ethan_sorenson/t0zhrq4v/">it can be done here</a>.</p>
+<h3 id='http-request'>HTTP Request</h3>
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-post">POST</i>
@@ -516,13 +521,43 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 
     <span class="c1"># base64 encode the bytes
 </span>    <span class="k">print</span><span class="p">(</span><span class="n">base64</span><span class="p">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">encrypted</span><span class="p">).</span><span class="n">decode</span><span class="p">())</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">encryptPassword</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">my password</span><span class="dl">'</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">vYofWQ63vYJZTB/EW4NT5LMlfiB5LftMMQSbJgFHvfE+Z8AXnCLNplBByGLWBLMolSwJZjJdUN5gLF0V/Q9aVwOK5GWAezt8IPwMYqAgwQ2btnlhrsKLkKoTtogGj9MYz9briYn/DHZlW56aOYvwSoz1LYhnoja59cG2UvIXxVE=</span><span class="dl">'</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">AQAB</span><span class="dl">'</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">rsa</span> <span class="o">=</span> <span class="nx">forge</span><span class="p">.</span><span class="nx">pki</span><span class="p">.</span><span class="nx">rsa</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">BigInteger</span> <span class="o">=</span> <span class="nx">forge</span><span class="p">.</span><span class="nx">jsbn</span><span class="p">.</span><span class="nx">BigInteger</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nx">parseBigInteger</span><span class="p">(</span><span class="nx">b64</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">BigInteger</span><span class="p">(</span><span class="nx">forge</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">createBuffer</span><span class="p">(</span><span class="nx">forge</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">decode64</span><span class="p">(</span><span class="nx">b64</span><span class="p">)).</span><span class="nx">toHex</span><span class="p">(),</span> <span class="mi">16</span><span class="p">);</span>
+   <span class="p">}</span>
+  <span class="kd">var</span> <span class="nx">pubKey</span> <span class="o">=</span> <span class="nx">rsa</span><span class="p">.</span><span class="nx">setPublicKey</span><span class="p">(</span><span class="nx">parseBigInteger</span><span class="p">(</span><span class="nx">n</span><span class="p">),</span> <span class="nx">parseBigInteger</span><span class="p">(</span><span class="nx">e</span><span class="p">));</span>
+  <span class="kd">var</span> <span class="nx">encryptedData</span> <span class="o">=</span> <span class="nx">pubKey</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">password</span><span class="p">).</span><span class="nx">value</span><span class="p">,</span> <span class="dl">'</span><span class="s1">RSAES-PKCS1-V1_5</span><span class="dl">'</span><span class="p">);</span>
+  <span class="c1">// write output</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="dl">'</span><span class="s1">Encrypted Password: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">btoa</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">)</span> <span class="o">+</span>
+  <span class="dl">'</span><span class="s1">&lt;br&gt;Unencrypted Password: </span><span class="dl">'</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">btoa</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">)));</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">check</span> <span class="n">other</span> <span class="n">languages</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns a string:</p>
+<p>A request for the public key will return an xml payload:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight xml tab-xml"><code><span class="nt">&lt;RSAKeyValue&gt;</span>
+    <span class="nt">&lt;Modulus&gt;</span>vYofWQ63vYJZTB/EW4NT5LMlfiB5LftMMQSbJgFHvfE+Z8AXnCLNplBByGLWBLMolSwJZjJdUN5gLF0V/Q9aVwOK5GWAezt8IPwMYqAgwQ2btnlhrsKLkKoTtogGj9MYz9briYn/DHZlW56aOYvwSoz1LYhnoja59cG2UvIXxVE=<span class="nt">&lt;/Modulus&gt;</span>
+    <span class="nt">&lt;Exponent&gt;</span>AQAB<span class="nt">&lt;/Exponent&gt;</span>
+<span class="nt">&lt;/RSAKeyValue&gt;</span>
+</code></pre></div>
+<blockquote>
+<p>An encrypted password will look like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="s2">"Bqr+OK0r4f8gURRCt3RCmxfem2PF2lE5lMIZ2ZsOEu9rDmEk93wuFrFIRFPLX4Wm8HDq7HgNn/mj7TT18uQj1UpqFVoizQLs6TWgLLUdqjxqeTFamvJaAVUh392tsQDTgkHkU4UwB8MABay2lr987GJIUDd4MaC2Aj11t8XjaXCU="</span><span class="w">
 </span></code></pre></div><h2 id='getcompanies'>GetCompanies</h2>
-<p>Optionally you can retrieve a list of companies with the companies endpoint.</p>
+<p>Optionally, you can retrieve a list of companies with the companies endpoint.
+This will return the CustomerId the same as shown in the SmartConnect client.</p>
+
+<aside class="notice">
+When calling the GetCompanies endpoint, don't use an encrypted password, it should end with '='
+</aside>
 <h3 id='http-request-2'>HTTP Request</h3>
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -532,7 +567,7 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 </div>
 
 <blockquote>
-<p>To generate a token, use this code:</p>
+<p>To retrieve a list of companies, use this code:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"https://login.smartconnect.com/v1/companies"</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
@@ -609,6 +644,10 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='gettoken'>GetToken</h2>
 <p>The GetToken endpoint requires 3 parameters. To generate a token.</p>
+
+<aside class="notice">
+When calling the GetToken endpoint make sure the encrypted password is URI encoded, it should end with '%3D'
+</aside>
 <h3 id='http-request-3'>HTTP Request</h3>
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -2142,8 +2181,8 @@ If the option to "Export Processing Errors as" is set to "Save as CSV/XML" on th
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">cUrl</a>
                 <a href="#" data-language-name="python">Python</a>
-                <a href="#" data-language-name="javascript">javaScript</a>
-                <a href="#" data-language-name="chsarp">C</a>
+                <a href="#" data-language-name="javascript">JavaScript</a>
+                <a href="#" data-language-name="chsarp">C#</a>
           </div>
       </div>
     </div>
