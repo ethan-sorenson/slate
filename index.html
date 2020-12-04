@@ -282,14 +282,14 @@
     </style>
     <link href="stylesheets/screen-ee6cbb80.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-9f013770.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all-e9bde216.js"></script>
+      <script src="javascripts/all-e033bdd3.js"></script>
 
     <script>
       $(function() { setupCodeCopy(); });
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;python&quot;,&quot;javascript&quot;,&quot;chsarp&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -301,6 +301,8 @@
         <div class="lang-selector">
               <a href="#" data-language-name="shell">cUrl</a>
               <a href="#" data-language-name="python">Python</a>
+              <a href="#" data-language-name="javascript">javaScript</a>
+              <a href="#" data-language-name="chsarp">C</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -325,7 +327,7 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#http-request" class="toc-h2 toc-link" data-title="HTTP Request">HTTP Request</a>
+                    <a href="#password-encryption" class="toc-h2 toc-link" data-title="Password Encryption">Password Encryption</a>
                   </li>
                   <li>
                     <a href="#getcompanies" class="toc-h2 toc-link" data-title="GetCompanies">GetCompanies</a>
@@ -475,7 +477,7 @@ The password will need to be encrypted using RSA encrytion using <a href="https:
 <aside class="notice">
 Tokens are company specific and are valid for 3 months. If your username has access to multiple companies, you will need to generate a separate token for each company.
 </aside>
-<h3 id='http-request'>HTTP Request</h3>
+<h2 id='password-encryption'>Password Encryption</h2><h3 id='http-request'>HTTP Request</h3>
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-post">POST</i>
@@ -513,7 +515,7 @@ Tokens are company specific and are valid for 3 months. If your username has acc
     <span class="n">encrypted</span> <span class="o">=</span> <span class="n">pubkey</span><span class="p">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 
     <span class="c1"># base64 encode the bytes
-</span>    <span class="k">return</span> <span class="n">base64</span><span class="p">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">encrypted</span><span class="p">).</span><span class="n">decode</span><span class="p">()</span>
+</span>    <span class="k">print</span><span class="p">(</span><span class="n">base64</span><span class="p">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">encrypted</span><span class="p">).</span><span class="n">decode</span><span class="p">())</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns a string:</p>
@@ -2140,6 +2142,8 @@ If the option to "Export Processing Errors as" is set to "Save as CSV/XML" on th
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">cUrl</a>
                 <a href="#" data-language-name="python">Python</a>
+                <a href="#" data-language-name="javascript">javaScript</a>
+                <a href="#" data-language-name="chsarp">C</a>
           </div>
       </div>
     </div>
