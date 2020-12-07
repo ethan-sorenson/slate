@@ -33,7 +33,7 @@ This endpoint runs the specified Integration Process.
 
 ```shell
 curl POST "{{API Url}}/runmap?token={{Token}}&mapKey={{mapKey}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' 
 ```
 
@@ -42,7 +42,7 @@ import requests
 
 url = "{{API Url}}/runmap?token={{Token}}&mapKey={{mapKey}}"
 headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
@@ -51,11 +51,28 @@ response = requests.request("POST", url, headers=headers)
 print(response.text.encode('utf8'))
 ```
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "{{API Url}}/runmap?token={{Token}}&mapKey={{mapKey}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.setRequestHeader("Accept", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/runmap?token={{Token}}&mapKey={{mapKey}}");
+request.Method = "POST";
+request.ContentLength = 0;
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:
@@ -180,11 +197,35 @@ response = requests.request("POST", url, headers=headers, data = payload)
 print(response.text.encode('utf8'))
 ```
 ```javascript
-coming soon...
+var data = JSON.stringify({"Variables":"[ { Key: \"GBL_COUNTY\", Value: \"GA\" } ]","Xml":""});
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "{{API Url}}/RunMapWithVariables?token={{Token}}&mapKey={{mapKey}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.setRequestHeader("Accept", "application/json");
+
+xhr.send(data);
 ```
 
 ```csharp
-coming soon...
+string data = "{ \r\n  \"Variables\": \"[ { Key: \\\"GBL_COUNTY\\\", Value: \\\"GA\\\" } ]\", \r\n  \"Xml\": \"\" \r\n}";
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/RunMapWithVariables?token={{Token}}&mapKey={{mapKey}}");
+request.Method = "POST";
+request.ContentType = "application/json";
+request.ContentLength = data.Length;
+
+using(Stream reqStream = request.GetRequestStream())
+{
+ reqStream.Write(Encoding.ASCII.GetBytes(xml),0,xml.Length);
+}
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:
@@ -301,11 +342,35 @@ response = requests.request("POST", url, headers=headers, data = payload)
 print(response.text.encode('utf8'))
 ```
 ```javascript
-coming soon...
+var data =  "<RequestData><Table><accountnumber>C00070</accountnumber><CustomerID>ID</CustomerID><name>Test Account 001</name></Table></RequestData>";
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "{{API Url}}/RunMapDataTable?token={{Token}}&mapKey={{mapKey}}");
+xhr.setRequestHeader("Content-Type", "application/xml");
+xhr.setRequestHeader("Accept", "application/json");
+
+xhr.send(data);
 ```
 
 ```csharp
-coming soon...
+string data = "<RequestData><Table><accountnumber>C00070</accountnumber><CustomerID>ID</CustomerID><name>Test Account 001</name></Table></RequestData>";
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/RunMapDataTable?token={{Token}}&mapKey={{mapKey}}");
+request.Method = "POST";
+request.ContentType = "application/xml";
+request.ContentLength = data.Length;
+
+using(Stream reqStream = request.GetRequestStream())
+{
+ reqStream.Write(Encoding.ASCII.GetBytes(xml),0,xml.Length);
+}
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:
@@ -335,8 +400,6 @@ mapKey | true | Unique identifier for the process to retrieve
 
 ## RunMapDataTableWithErrors
 This endpoint runs the specified process with the provided XML data table, and returns error messages.
-
-For additional information about Global Variables reference [this article](https://www.eonesolutions.com/help-article/global-variables-in-smartconnect-com/).
 
 ### HTTP Request
 
@@ -383,12 +446,37 @@ response = requests.request("POST", url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
 ```
+
 ```javascript
-coming soon...
+var data =  "<RequestData><Table><accountnumber>C00070</accountnumber><CustomerID>ID</CustomerID><name>Test Account 001</name></Table></RequestData>";
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "{{API Url}}/RunMapDataTableWithErrors?token={{Token}}&mapKey={{mapKey}}");
+xhr.setRequestHeader("Content-Type", "application/xml");
+xhr.setRequestHeader("Accept", "application/json");
+
+xhr.send(data);
 ```
 
 ```csharp
-coming soon...
+string data = "<RequestData><Table><accountnumber>C00070</accountnumber><CustomerID>ID</CustomerID><name>Test Account 001</name></Table></RequestData>";
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/RunMapDataTableWithErrors?token={{Token}}&mapKey={{mapKey}}");
+request.Method = "POST";
+request.ContentType = "application/xml";
+request.ContentLength = data.Length;
+
+using(Stream reqStream = request.GetRequestStream())
+{
+ reqStream.Write(Encoding.ASCII.GetBytes(xml),0,xml.Length);
+}
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:
@@ -509,12 +597,55 @@ response = requests.request("POST", url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
 ```
+
 ```javascript
-coming soon...
+var data =  "<RequestData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"  
++ "</Variables>"
++ "<Xml>&lt;DataSet&gt;&#xD;"
++ "&lt;Table&gt;&#xD;"
++ "&lt;County&gt;ND&lt;/County&gt;&#xD;"
++ "&lt;Name&gt;Test&lt;/Name&gt;&#xD;"
++ "&lt;No&gt;Test&lt;/No&gt;&#xD;"
++ "&lt;/Table&gt;&#xD;"
++ "&lt;/DataSet&gt;</Xml>"
++ "</RequestData>";
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "{{API Url}}/RunMapXml?token={{Token}}&mapKey={{mapKey}}");
+xhr.setRequestHeader("Content-Type", "application/xml");
+xhr.setRequestHeader("Accept", "application/json");
+
+xhr.send(data);
 ```
 
 ```csharp
-coming soon...
+string data = "<RequestData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"  
++ "</Variables>"
++ "<Xml>&lt;DataSet&gt;&#xD;"
++ "&lt;Table&gt;&#xD;"
++ "&lt;County&gt;ND&lt;/County&gt;&#xD;"
++ "&lt;Name&gt;Test&lt;/Name&gt;&#xD;"
++ "&lt;No&gt;Test&lt;/No&gt;&#xD;"
++ "&lt;/Table&gt;&#xD;"
++ "&lt;/DataSet&gt;</Xml>"
++ "</RequestData>";
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/RunMapXml?token={{Token}}&mapKey={{mapKey}}");
+request.Method = "POST";
+request.ContentType = "application/xml";
+request.ContentLength = data.Length;
+
+using(Stream reqStream = request.GetRequestStream())
+{
+ reqStream.Write(Encoding.ASCII.GetBytes(xml),0,xml.Length);
+}
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:

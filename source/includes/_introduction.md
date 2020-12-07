@@ -13,14 +13,14 @@ The API can be used to remotely interact with SmartConnect. Some of the core fun
 To use this version of the REST API you will need the following:
 
 * An active SaaS subscription for [SmartConnect.com](https://smartconnect.com/)
-* A valid user login to [SmartConnect.com](https://smartconnect.com/Account/Login)
+* A valid user login to [SmartConnect.com](https://login.smartconnect.com/)
 
 ## Getting Started
 
 Connecting to the API will require the following information. The API Settings can be access in SmartConnect.com > System API Settings
 
 <aside class="warning">
-If using JavaScript, note that the web service does not support [Cross-origin resource sharing (CORS)](https://www.eonesolutions.com/help-article/no-access-control-allow-origin-header-is-present-on-the-requested-resource/)
+If using JavaScript, note that the web service does not support [Cross-origin resource sharing \(CORS\)](https://www.eonesolutions.com/help-article/no-access-control-allow-origin-header-is-present-on-the-requested-resource/)
 </aside>
 
 ### Needed Variables

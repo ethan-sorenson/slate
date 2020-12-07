@@ -9,7 +9,7 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 
 ## Password Encryption
 
-Password encryption will be required prior to sending the requests for "GetCompanies" and "GetToken".
+Password encryption will be required prior to sending the requests for "GetCompanyList" and "GetToken".
 Encryption will require the most recent public-key containing the RSA module and exponent.
 
 If you want to quickly encrypt your password for testing, [it can be done here](https://jsfiddle.net/ethan_sorenson/t0zhrq4v/).
@@ -117,13 +117,17 @@ using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider(1024))
 "Bqr+OK0r4f8gURRCt3RCmxfem2PF2lE5lMIZ2ZsOEu9rDmEk93wuFrFIRFPLX4Wm8HDq7HgNn/mj7TT18uQj1UpqFVoizQLs6TWgLLUdqjxqeTFamvJaAVUh392tsQDTgkHkU4UwB8MABay2lr987GJIUDd4MaC2Aj11t8XjaXCU="
 ```
 
+<aside class="notice">
+The password is padded meaning that random data is added to ensure that encrypting the same plaintext twice will generate different ciphertext.
+</aside>
+
 ## GetCompanyList
 
 Optionally, you can retrieve a list of companies with the GetCompanyList endpoint.
 This will return the CustomerId the same as shown in the SmartConnect client.
 
 <aside class="notice">
-When calling the GetCompanyList endpoint, use an RSA encoded password, it should end with '='
+When calling the GetCompanyList endpoint make sure the RSA encrypted password is URI encoded, it should end with '%3D'
 </aside>
 
 ### HTTP Request

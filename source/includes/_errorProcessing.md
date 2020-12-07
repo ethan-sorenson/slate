@@ -18,7 +18,7 @@ This endpoint retrieves the last 10 runs of the specified process.
 
 ```shell
 curl GET "{{API Url}}/GetHistoryForProcess?token={{Token}}&processId={{processId}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' 
 ```
 
@@ -27,7 +27,7 @@ import requests
 
 url = "{{API Url}}/GetHistoryForProcess?token={{Token}}&processId={{processId}}"
 headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
@@ -37,11 +37,26 @@ print(response.text.encode('utf8'))
 ```
 
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "{{API Url}}/GetHistoryForProcess?token={{Token}}&processId={{processId}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/GetHistoryForProcess?token={{Token}}&processId={{processId}}");
+request.Method = "GET";
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:
@@ -93,7 +108,7 @@ This endpoint retrieves the error messages from a specified process run.
 
 ```shell
 curl GET "{{API Url}}/GetErrorsForProcessRun?token={{Token}}&processId={{processId}}&runNumber={{runNumber}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' 
 ```
 
@@ -102,7 +117,7 @@ import requests
 
 url = "{{API Url}}/GetErrorsForProcessRun?token={{Token}}&processId={{processId}}&runNumber={{runNumber}}"
 headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
@@ -111,11 +126,26 @@ response = requests.request("GET", url, headers=headers)
 print(response.text.encode('utf8'))
 ```
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "{{API Url}}/GetErrorsForProcessRun?token={{Token}}&processId={{processId}}&runNumber={{runNumber}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/GetErrorsForProcessRun?token={{Token}}&processId={{processId}}&runNumber={{runNumber}}");
+request.Method = "GET";
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:
@@ -190,7 +220,7 @@ If the option to "Export Processing Errors as" is set to "Save as CSV/XML" on th
 
 ```shell
 curl GET "{{API Url}}/GetOutputsForProcess?token={{Token}}&processId={{processId}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' 
 ```
 
@@ -199,7 +229,7 @@ import requests
 
 url = "{{API Url}}/GetOutputsForProcess?token={{Token}}&processId={{processId}}"
 headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
@@ -208,11 +238,26 @@ response = requests.request("GET", url, headers=headers)
 print(response.text.encode('utf8'))
 ```
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "{{API Url}}/GetOutputsForProcess?token={{Token}}&processId={{processId}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/GetOutputsForProcess?token={{Token}}&processId={{processId}}");
+request.Method = "GET";
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:
