@@ -436,13 +436,13 @@
 
 <ul>
 <li>An active SaaS subscription for <a href="https://smartconnect.com/">SmartConnect.com</a></li>
-<li>A valid user login to <a href="https://smartconnect.com/Account/Login">SmartConnect.com</a></li>
+<li>A valid user login to <a href="https://login.smartconnect.com/">SmartConnect.com</a></li>
 </ul>
 <h2 id='getting-started'>Getting Started</h2>
 <p>Connecting to the API will require the following information. The API Settings can be access in SmartConnect.com &gt; System API Settings</p>
 
 <aside class="warning">
-If using JavaScript, note that the web service does not support [Cross-origin resource sharing (CORS)](https://www.eonesolutions.com/help-article/no-access-control-allow-origin-header-is-present-on-the-requested-resource/)
+If using JavaScript, note that the web service does not support [Cross-origin resource sharing \(CORS\)](https://www.eonesolutions.com/help-article/no-access-control-allow-origin-header-is-present-on-the-requested-resource/)
 </aside>
 <h3 id='needed-variables'>Needed Variables</h3>
 <table><thead>
@@ -482,7 +482,7 @@ The password will need to be encrypted using RSA encrytion using <a href="https:
 Tokens are company specific and are valid for 3 months. If your username has access to multiple companies, you will need to generate a separate token for each company.
 </aside>
 <h2 id='password-encryption'>Password Encryption</h2>
-<p>Password encryption will be required prior to sending the requests for &quot;GetCompanies&quot; and &quot;GetToken&quot;.
+<p>Password encryption will be required prior to sending the requests for &quot;GetCompanyList&quot; and &quot;GetToken&quot;.
 Encryption will require the most recent public-key containing the RSA module and exponent.</p>
 
 <p>If you want to quickly encrypt your password for testing, <a href="https://jsfiddle.net/ethan_sorenson/t0zhrq4v/">it can be done here</a>.</p>
@@ -575,12 +575,16 @@ Encryption will require the most recent public-key containing the RSA module and
 <p>An encrypted password will look like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="s2">"Bqr+OK0r4f8gURRCt3RCmxfem2PF2lE5lMIZ2ZsOEu9rDmEk93wuFrFIRFPLX4Wm8HDq7HgNn/mj7TT18uQj1UpqFVoizQLs6TWgLLUdqjxqeTFamvJaAVUh392tsQDTgkHkU4UwB8MABay2lr987GJIUDd4MaC2Aj11t8XjaXCU="</span><span class="w">
-</span></code></pre></div><h2 id='getcompanylist'>GetCompanyList</h2>
+</span></code></pre></div>
+<aside class="notice">
+The password is padded meaning that random data is added to ensure that encrypting the same plaintext twice will generate different ciphertext.
+</aside>
+<h2 id='getcompanylist'>GetCompanyList</h2>
 <p>Optionally, you can retrieve a list of companies with the GetCompanyList endpoint.
 This will return the CustomerId the same as shown in the SmartConnect client.</p>
 
 <aside class="notice">
-When calling the GetCompanyList endpoint, use an RSA encoded password, it should end with '='
+When calling the GetCompanyList endpoint make sure the RSA encrypted password is URI encoded, it should end with '%3D'
 </aside>
 <h3 id='http-request-2'>HTTP Request</h3>
 <div class="api-endpoint">
@@ -1520,7 +1524,7 @@ Real-time data source maps will not show in this list.
 </tr>
 </tbody></table>
 
-<aside class="warning">Make sure the global variable is referenced in a script within the Process and as a filter criteria.</aside>
+<aside class="notice">Make sure the global variable is referenced in a script within the Process and as a filter criteria.</aside>
 
 <aside class="warning">Currently this endpoint only returns data as XML</aside>
 <h1 id='map-runs'>Map Runs</h1>
@@ -1593,21 +1597,38 @@ Real-time data source maps will not show in this list.
 <p>To run a specified process, use this code:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"{{API Url}}/runmap?token={{Token}}&amp;mapKey={{mapKey}}"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/runmap?token={{Token}}&amp;mapKey={{mapKey}}"</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">coming</span> <span class="nx">soon</span><span class="p">...</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">coming</span> <span class="n">soon</span><span class="p">...</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">{{API Url}}/runmap?token={{Token}}&amp;mapKey={{mapKey}}</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Accept</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"{{API Url}}/runmap?token={{Token}}&amp;mapKey={{mapKey}}"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"POST"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentLength</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentType</span> <span class="p">=</span> <span class="s">"application/json"</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">GetResponse</span><span class="p">();</span>
+
+<span class="k">using</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">StreamReader</span> <span class="n">responseStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="nf">StreamReader</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">GetResponseStream</span><span class="p">()))</span>
+<span class="p">{</span>
+ <span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="n">responseStream</span><span class="p">.</span><span class="nf">ReadToEnd</span><span class="p">();</span> 
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1732,8 +1753,32 @@ Real-time data source maps will not show in this list.
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">coming</span> <span class="nx">soon</span><span class="p">...</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">coming</span> <span class="n">soon</span><span class="p">...</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">Variables</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">[ { Key: </span><span class="se">\"</span><span class="s2">GBL_COUNTY</span><span class="se">\"</span><span class="s2">, Value: </span><span class="se">\"</span><span class="s2">GA</span><span class="se">\"</span><span class="s2"> } ]</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">Xml</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">});</span>
+<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">{{API Url}}/RunMapWithVariables?token={{Token}}&amp;mapKey={{mapKey}}</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Accept</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="kt">string</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"{ \r\n  \"Variables\": \"[ { Key: \\\"GBL_COUNTY\\\", Value: \\\"GA\\\" } ]\", \r\n  \"Xml\": \"\" \r\n}"</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"{{API Url}}/RunMapWithVariables?token={{Token}}&amp;mapKey={{mapKey}}"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"POST"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentType</span> <span class="p">=</span> <span class="s">"application/json"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentLength</span> <span class="p">=</span> <span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span>
+
+<span class="k">using</span><span class="p">(</span><span class="n">Stream</span> <span class="n">reqStream</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">GetRequestStream</span><span class="p">())</span>
+<span class="p">{</span>
+ <span class="n">reqStream</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="n">Encoding</span><span class="p">.</span><span class="n">ASCII</span><span class="p">.</span><span class="nf">GetBytes</span><span class="p">(</span><span class="n">xml</span><span class="p">),</span><span class="m">0</span><span class="p">,</span><span class="n">xml</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">GetResponse</span><span class="p">();</span>
+<span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+<span class="k">using</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">StreamReader</span> <span class="n">responseStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="nf">StreamReader</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">GetResponseStream</span><span class="p">()))</span>
+<span class="p">{</span>
+ <span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="n">responseStream</span><span class="p">.</span><span class="nf">ReadToEnd</span><span class="p">();</span> 
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1850,8 +1895,32 @@ Real-time data source maps will not show in this list.
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">coming</span> <span class="nx">soon</span><span class="p">...</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">coming</span> <span class="n">soon</span><span class="p">...</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span>  <span class="dl">"</span><span class="s2">&lt;RequestData&gt;&lt;Table&gt;&lt;accountnumber&gt;C00070&lt;/accountnumber&gt;&lt;CustomerID&gt;ID&lt;/CustomerID&gt;&lt;name&gt;Test Account 001&lt;/name&gt;&lt;/Table&gt;&lt;/RequestData&gt;</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">{{API Url}}/RunMapDataTable?token={{Token}}&amp;mapKey={{mapKey}}</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/xml</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Accept</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="kt">string</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"&lt;RequestData&gt;&lt;Table&gt;&lt;accountnumber&gt;C00070&lt;/accountnumber&gt;&lt;CustomerID&gt;ID&lt;/CustomerID&gt;&lt;name&gt;Test Account 001&lt;/name&gt;&lt;/Table&gt;&lt;/RequestData&gt;"</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"{{API Url}}/RunMapDataTable?token={{Token}}&amp;mapKey={{mapKey}}"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"POST"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentType</span> <span class="p">=</span> <span class="s">"application/xml"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentLength</span> <span class="p">=</span> <span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span>
+
+<span class="k">using</span><span class="p">(</span><span class="n">Stream</span> <span class="n">reqStream</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">GetRequestStream</span><span class="p">())</span>
+<span class="p">{</span>
+ <span class="n">reqStream</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="n">Encoding</span><span class="p">.</span><span class="n">ASCII</span><span class="p">.</span><span class="nf">GetBytes</span><span class="p">(</span><span class="n">xml</span><span class="p">),</span><span class="m">0</span><span class="p">,</span><span class="n">xml</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">GetResponse</span><span class="p">();</span>
+<span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+<span class="k">using</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">StreamReader</span> <span class="n">responseStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="nf">StreamReader</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">GetResponseStream</span><span class="p">()))</span>
+<span class="p">{</span>
+ <span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="n">responseStream</span><span class="p">.</span><span class="nf">ReadToEnd</span><span class="p">();</span> 
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1889,8 +1958,6 @@ Real-time data source maps will not show in this list.
 <aside class="warning">Currently this endpoint only returns the errors as an XML data table</aside>
 <h2 id='runmapdatatablewitherrors'>RunMapDataTableWithErrors</h2>
 <p>This endpoint runs the specified process with the provided XML data table, and returns error messages.</p>
-
-<p>For additional information about Global Variables reference <a href="https://www.eonesolutions.com/help-article/global-variables-in-smartconnect-com/">this article</a>.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -1931,8 +1998,32 @@ Real-time data source maps will not show in this list.
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">coming</span> <span class="nx">soon</span><span class="p">...</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">coming</span> <span class="n">soon</span><span class="p">...</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span>  <span class="dl">"</span><span class="s2">&lt;RequestData&gt;&lt;Table&gt;&lt;accountnumber&gt;C00070&lt;/accountnumber&gt;&lt;CustomerID&gt;ID&lt;/CustomerID&gt;&lt;name&gt;Test Account 001&lt;/name&gt;&lt;/Table&gt;&lt;/RequestData&gt;</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">{{API Url}}/RunMapDataTableWithErrors?token={{Token}}&amp;mapKey={{mapKey}}</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/xml</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Accept</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="kt">string</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"&lt;RequestData&gt;&lt;Table&gt;&lt;accountnumber&gt;C00070&lt;/accountnumber&gt;&lt;CustomerID&gt;ID&lt;/CustomerID&gt;&lt;name&gt;Test Account 001&lt;/name&gt;&lt;/Table&gt;&lt;/RequestData&gt;"</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"{{API Url}}/RunMapDataTableWithErrors?token={{Token}}&amp;mapKey={{mapKey}}"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"POST"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentType</span> <span class="p">=</span> <span class="s">"application/xml"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentLength</span> <span class="p">=</span> <span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span>
+
+<span class="k">using</span><span class="p">(</span><span class="n">Stream</span> <span class="n">reqStream</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">GetRequestStream</span><span class="p">())</span>
+<span class="p">{</span>
+ <span class="n">reqStream</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="n">Encoding</span><span class="p">.</span><span class="n">ASCII</span><span class="p">.</span><span class="nf">GetBytes</span><span class="p">(</span><span class="n">xml</span><span class="p">),</span><span class="m">0</span><span class="p">,</span><span class="n">xml</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">GetResponse</span><span class="p">();</span>
+<span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+<span class="k">using</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">StreamReader</span> <span class="n">responseStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="nf">StreamReader</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">GetResponseStream</span><span class="p">()))</span>
+<span class="p">{</span>
+ <span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="n">responseStream</span><span class="p">.</span><span class="nf">ReadToEnd</span><span class="p">();</span> 
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -2055,8 +2146,50 @@ Real-time data source maps will not show in this list.
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">coming</span> <span class="nx">soon</span><span class="p">...</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">coming</span> <span class="n">soon</span><span class="p">...</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span>  <span class="dl">"</span><span class="s2">&lt;RequestData xmlns:i=</span><span class="se">\"</span><span class="s2">http://www.w3.org/2001/XMLSchema-instance</span><span class="se">\"</span><span class="s2">&gt;</span><span class="dl">"</span>  
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/Variables&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Xml&gt;&amp;lt;DataSet&amp;gt;&amp;#xD;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&amp;lt;Table&amp;gt;&amp;#xD;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&amp;lt;County&amp;gt;ND&amp;lt;/County&amp;gt;&amp;#xD;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&amp;lt;Name&amp;gt;Test&amp;lt;/Name&amp;gt;&amp;#xD;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&amp;lt;No&amp;gt;Test&amp;lt;/No&amp;gt;&amp;#xD;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&amp;lt;/Table&amp;gt;&amp;#xD;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&amp;lt;/DataSet&amp;gt;&lt;/Xml&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/RequestData&gt;</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">{{API Url}}/RunMapXml?token={{Token}}&amp;mapKey={{mapKey}}</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/xml</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Accept</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="kt">string</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"&lt;RequestData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"&gt;"</span>  
+<span class="p">+</span> <span class="s">"&lt;/Variables&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Xml&gt;&amp;lt;DataSet&amp;gt;&amp;#xD;"</span>
+<span class="p">+</span> <span class="s">"&amp;lt;Table&amp;gt;&amp;#xD;"</span>
+<span class="p">+</span> <span class="s">"&amp;lt;County&amp;gt;ND&amp;lt;/County&amp;gt;&amp;#xD;"</span>
+<span class="p">+</span> <span class="s">"&amp;lt;Name&amp;gt;Test&amp;lt;/Name&amp;gt;&amp;#xD;"</span>
+<span class="p">+</span> <span class="s">"&amp;lt;No&amp;gt;Test&amp;lt;/No&amp;gt;&amp;#xD;"</span>
+<span class="p">+</span> <span class="s">"&amp;lt;/Table&amp;gt;&amp;#xD;"</span>
+<span class="p">+</span> <span class="s">"&amp;lt;/DataSet&amp;gt;&lt;/Xml&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/RequestData&gt;"</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"{{API Url}}/RunMapXml?token={{Token}}&amp;mapKey={{mapKey}}"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"POST"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentType</span> <span class="p">=</span> <span class="s">"application/xml"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentLength</span> <span class="p">=</span> <span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span>
+
+<span class="k">using</span><span class="p">(</span><span class="n">Stream</span> <span class="n">reqStream</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">GetRequestStream</span><span class="p">())</span>
+<span class="p">{</span>
+ <span class="n">reqStream</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="n">Encoding</span><span class="p">.</span><span class="n">ASCII</span><span class="p">.</span><span class="nf">GetBytes</span><span class="p">(</span><span class="n">xml</span><span class="p">),</span><span class="m">0</span><span class="p">,</span><span class="n">xml</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">GetResponse</span><span class="p">();</span>
+<span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+<span class="k">using</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">StreamReader</span> <span class="n">responseStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="nf">StreamReader</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">GetResponseStream</span><span class="p">()))</span>
+<span class="p">{</span>
+ <span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="n">responseStream</span><span class="p">.</span><span class="nf">ReadToEnd</span><span class="p">();</span> 
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -2147,21 +2280,36 @@ Real-time data source maps will not show in this list.
 <p>To retrieve a list of process runs, use this code:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl GET <span class="s2">"{{API Url}}/GetHistoryForProcess?token={{Token}}&amp;processId={{processId}}"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetHistoryForProcess?token={{Token}}&amp;processId={{processId}}"</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">coming</span> <span class="nx">soon</span><span class="p">...</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">coming</span> <span class="n">soon</span><span class="p">...</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">{{API Url}}/GetHistoryForProcess?token={{Token}}&amp;processId={{processId}}</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"{{API Url}}/GetHistoryForProcess?token={{Token}}&amp;processId={{processId}}"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"GET"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentType</span> <span class="p">=</span> <span class="s">"application/json"</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">GetResponse</span><span class="p">();</span>
+<span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+<span class="k">using</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">StreamReader</span> <span class="n">responseStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="nf">StreamReader</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">GetResponseStream</span><span class="p">()))</span>
+<span class="p">{</span>
+ <span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="n">responseStream</span><span class="p">.</span><span class="nf">ReadToEnd</span><span class="p">();</span> 
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -2221,21 +2369,36 @@ Real-time data source maps will not show in this list.
 <p>To retrieve a list of process errors for a prpcess run, use this code:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl GET <span class="s2">"{{API Url}}/GetErrorsForProcessRun?token={{Token}}&amp;processId={{processId}}&amp;runNumber={{runNumber}}"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetErrorsForProcessRun?token={{Token}}&amp;processId={{processId}}&amp;runNumber={{runNumber}}"</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">coming</span> <span class="nx">soon</span><span class="p">...</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">coming</span> <span class="n">soon</span><span class="p">...</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">{{API Url}}/GetErrorsForProcessRun?token={{Token}}&amp;processId={{processId}}&amp;runNumber={{runNumber}}</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"{{API Url}}/GetErrorsForProcessRun?token={{Token}}&amp;processId={{processId}}&amp;runNumber={{runNumber}}"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"GET"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentType</span> <span class="p">=</span> <span class="s">"application/json"</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">GetResponse</span><span class="p">();</span>
+<span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+<span class="k">using</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">StreamReader</span> <span class="n">responseStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="nf">StreamReader</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">GetResponseStream</span><span class="p">()))</span>
+<span class="p">{</span>
+ <span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="n">responseStream</span><span class="p">.</span><span class="nf">ReadToEnd</span><span class="p">();</span> 
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -2322,21 +2485,36 @@ If the option to "Export Processing Errors as" is set to "Save as CSV/XML" on th
 <p>To retrieve a list of process outputs, use this code:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl GET <span class="s2">"{{API Url}}/GetOutputsForProcess?token={{Token}}&amp;processId={{processId}}"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/GetOutputsForProcess?token={{Token}}&amp;processId={{processId}}"</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">coming</span> <span class="nx">soon</span><span class="p">...</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">coming</span> <span class="n">soon</span><span class="p">...</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">{{API Url}}/GetOutputsForProcess?token={{Token}}&amp;processId={{processId}}</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"{{API Url}}/GetOutputsForProcess?token={{Token}}&amp;processId={{processId}}"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"GET"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">ContentType</span> <span class="p">=</span> <span class="s">"application/json"</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">GetResponse</span><span class="p">();</span>
+<span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+<span class="k">using</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">StreamReader</span> <span class="n">responseStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="nf">StreamReader</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">GetResponseStream</span><span class="p">()))</span>
+<span class="p">{</span>
+ <span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="n">responseStream</span><span class="p">.</span><span class="nf">ReadToEnd</span><span class="p">();</span> 
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
