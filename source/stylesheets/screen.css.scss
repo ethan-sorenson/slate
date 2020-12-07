@@ -476,6 +476,14 @@ html, body {
     background: $aside-notice-bg;
     line-height: 1.6;
     color: #f2f2f2;
+    
+    a {
+      color: #fff;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
 
     &.warning {
       background-color: $aside-warning-bg;
@@ -515,7 +523,6 @@ html, body {
   a {
     color: $link-color;
     text-decoration: none;
-    font-weight: bold;
   
     &:hover {
       text-decoration: underline;

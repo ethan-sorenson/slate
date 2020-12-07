@@ -11,6 +11,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 toc_footers:
   - <a href='https://www.eonesolutions.com/Shop/SmartConnect'>Sign Up for a SmartConnect Trial</a>
+  - <a href='https://smartconnect.com/knowledge-base-2'>SmartConnect Documentation</a>
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -23,5 +24,5 @@ includes:
 
 search: true
 
-code_clipboard: true
+code_clipboard: false
 ---
