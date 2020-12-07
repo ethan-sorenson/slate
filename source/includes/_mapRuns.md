@@ -143,7 +143,7 @@ mapKey | true | Unique identifier for the process to retrieve
 
 This endpoint runs the specified process. If the process is using Global Variables, then the default value for those variables can be provided in the body of the request.
 
-For additional information about Global Variables reference [this article](https://www.eonesolutions.com/help-article/global-variables-in-smartconnect-com/).
+For additional information about Global Variables reference [this article](https://www.eonesolutions.com/help-article/global-variables-in-smartconnect-com/)
 
 ### HTTP Request
 
