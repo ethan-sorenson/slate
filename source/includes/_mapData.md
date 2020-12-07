@@ -92,7 +92,7 @@ mapKey | true | Unique identifier for the process to retrieve
 
 This endpoint retrieves the current defined source for the specified process. If the data source is using Global Variables in the query, the values passed in the body will be applied as filters prior to retrieving the data.
 
-For additional information about Global Variables reference [this article](https://www.eonesolutions.com/help-article/global-variables-in-smartconnect-com/).
+For additional information about Global Variables reference [this article](https://www.eonesolutions.com/help-article/global-variables-in-smartconnect-com/)
 
 ### HTTP Request
 

@@ -1,7 +1,7 @@
 # Authentication
 
 SmartConnect requires the user email, password, and companyId to generate a token.
-The password will need to be encrypted using RSA encrytion using [the PKCS #1 standard](https://en.wikipedia.org/wiki/PKCS_1).
+The password will need to be encrypted using RSA encrytion using [the PKCS #1 standard](https://en.wikipedia.org/wiki/PKCS_1)
 
 <aside class="notice">
 Tokens are company specific and are valid for 3 months. If your username has access to multiple companies, you will need to generate a separate token for each company.
@@ -12,7 +12,7 @@ Tokens are company specific and are valid for 3 months. If your username has acc
 Password encryption will be required prior to sending the requests for "GetCompanyList" and "GetToken".
 Encryption will require the most recent public-key containing the RSA module and exponent.
 
-If you want to quickly encrypt your password for testing, [it can be done here](https://jsfiddle.net/ethan_sorenson/t0zhrq4v/).
+If you want to quickly encrypt your password for testing, [it can be done here](https://jsfiddle.net/ethan_sorenson/t0zhrq4v/)
 
 ### HTTP Request
 
