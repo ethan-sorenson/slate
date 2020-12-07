@@ -18,7 +18,7 @@ This endpoint retrieves all configured connections.
 
 ```shell
 curl GET "{{API Url}}/GetConnections?token={{Token}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' 
 ```
 
@@ -27,7 +27,7 @@ import requests
 
 url = "{{API Url}}/GetConnections?token={{Token}}"
 headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
@@ -36,11 +36,26 @@ response = requests.request("GET", url, headers=headers)
 print(response.text.encode('utf8'))
 ```
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "{{API Url}}/GetConnections?token={{Token}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/GetConnections?token={{Token}}");
+request.Method = "GET";
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:
@@ -81,7 +96,7 @@ This endpoint retrieves all configured Data Sources.
 
 ```shell
 curl GET "{{API Url}}/GetDataSources?token={{Token}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' 
 ```
 
@@ -90,7 +105,7 @@ import requests
 
 url = "{{API Url}}/GetDataSources?token={{Token}}"
 headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
@@ -100,11 +115,26 @@ print(response.text.encode('utf8'))
 ```
 
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "{{API Url}}/GetDataSources?token={{Token}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/GetDataSources?token={{Token}}");
+request.Method = "GET";
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:
@@ -149,7 +179,7 @@ This endpoint retrieves all processes that can be used by the SmartConnect API.
 
 ```shell
 curl POST "{{API Url}}/GetMapList?token={{Token}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' 
 ```
 
@@ -158,7 +188,7 @@ import requests
 
 url = "{{API Url}}/GetMapList?token={{Token}}"
 headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
@@ -167,11 +197,26 @@ response = requests.request("POST", url, headers=headers)
 print(response.text.encode('utf8'))
 ```
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "{{API Url}}/GetMapList?token={{Token}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/GetMapList?token={{Token}}");
+request.Method = "POST";
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 
@@ -213,11 +258,11 @@ This endpoint retrieves all integration processes configured using the specified
 	</div>
 </div>
 
-> To retrieve a list of Integration Processes by Conenction, use this code:
+> To retrieve a list of Integration Processes by Connnection, use this code:
 
 ```shell
 curl GET "{{API Url}}/GetProcessesByConnection?token={{Token}}&connectionId={{connectionId}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' 
 ```
 
@@ -226,7 +271,7 @@ import requests
 
 url = "{{API Url}}/GetProcessesByConnection?token={{Token}}&connectionId={{connectionId}}"
 headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
@@ -236,11 +281,26 @@ print(response.text.encode('utf8'))
 ```
 
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "{{API Url}}/GetProcessesByConnection?token={{Token}}&connectionId={{connectionId}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/GetProcessesByConnection?token={{Token}}&connectionId={{connectionId}}");
+request.Method = "GET";
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:
@@ -300,7 +360,7 @@ This endpoint retrieves all integration processes configured using the specified
 
 ```shell
 curl GET "{{API Url}}/GetProcessesForDatasource?token={{Token}}&dataSourceId={{dataSourceId}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' 
 ```
 
@@ -309,7 +369,7 @@ import requests
 
 url = "{{API Url}}/GetProcessesForDatasource?token={{Token}}&dataSourceId={{dataSourceId}}"
 headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
@@ -318,11 +378,26 @@ response = requests.request("GET", url, headers=headers)
 print(response.text.encode('utf8'))
 ```
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "{{API Url}}/GetProcessesForDatasource?token={{Token}}&dataSourceId={{dataSourceId}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/GetProcessesForDatasource?token={{Token}}&dataSourceId={{dataSourceId}}");
+request.Method = "GET";
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:
@@ -362,7 +437,7 @@ This endpoint retrieves all columns defined in the data source of the process.
 
 ```shell
 curl POST "{{API Url}}/GetMapColumns?token={{Token}}&mapKey={{mapKey}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' 
 ```
 
@@ -371,7 +446,7 @@ import requests
 
 url = "{{API Url}}/GetMapColumns?token={{Token}}&mapKey={{mapKey}}"
 headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
@@ -379,12 +454,28 @@ response = requests.request("POST", url, headers=headers)
 
 print(response.text.encode('utf8'))
 ```
+
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "{{API Url}}/GetMapColumns?token={{Token}}&mapKey={{mapKey}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/GetMapColumns?token={{Token}}&mapKey={{mapKey}}");
+request.Method = "POST";
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:
@@ -429,7 +520,7 @@ This endpoint retrieves all source columns mapped to the target of the process.
 
 ```shell
 curl POST "{{API Url}}/GetMappedMapColumns?token={{Token}}&mapKey={{mapKey}}" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' 
 ```
 
@@ -438,7 +529,7 @@ import requests
 
 url = "{{API Url}}/GetMappedMapColumns?token={{Token}}&mapKey={{mapKey}}"
 headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
 
@@ -448,11 +539,26 @@ print(response.text.encode('utf8'))
 ```
 
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "{{API Url}}/GetMappedMapColumns?token={{Token}}&mapKey={{mapKey}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/GetMappedMapColumns?token={{Token}}&mapKey={{mapKey}}");
+request.Method = "POST";
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+string result = string.Empty;
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns JSON structured like this:

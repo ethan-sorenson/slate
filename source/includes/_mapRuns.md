@@ -2,7 +2,7 @@
 
 The Map Run endpoints can be used to run maps in SmartConnect. Upon completion of the map run in SmartConnect, the web service will respond with a status message.
 
-## Run Map Properties
+### Run Map Properties
 
 Attribute | Type | Description
 --------- | ------- | -----------
@@ -125,6 +125,8 @@ mapKey | true | Unique identifier for the process to retrieve
 ## RunMapWithVariables
 
 This endpoint runs the specified process. If the process is using Global Variables, then the default value for those variables can be provided in the body of the request.
+
+For additional information about Global Variables reference [this article](https://www.eonesolutions.com/help-article/global-variables-in-smartconnect-com/).
 
 ### HTTP Request
 
@@ -333,6 +335,8 @@ mapKey | true | Unique identifier for the process to retrieve
 
 ## RunMapDataTableWithErrors
 This endpoint runs the specified process with the provided XML data table, and returns error messages.
+
+For additional information about Global Variables reference [this article](https://www.eonesolutions.com/help-article/global-variables-in-smartconnect-com/).
 
 ### HTTP Request
 

@@ -117,13 +117,13 @@ using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider(1024))
 "Bqr+OK0r4f8gURRCt3RCmxfem2PF2lE5lMIZ2ZsOEu9rDmEk93wuFrFIRFPLX4Wm8HDq7HgNn/mj7TT18uQj1UpqFVoizQLs6TWgLLUdqjxqeTFamvJaAVUh392tsQDTgkHkU4UwB8MABay2lr987GJIUDd4MaC2Aj11t8XjaXCU="
 ```
 
-## GetCompanies
+## GetCompanyList
 
-Optionally, you can retrieve a list of companies with the companies endpoint.
+Optionally, you can retrieve a list of companies with the GetCompanyList endpoint.
 This will return the CustomerId the same as shown in the SmartConnect client.
 
 <aside class="notice">
-When calling the GetCompanies endpoint, use an RSA encoded password, it should end with '='
+When calling the GetCompanyList endpoint, use an RSA encoded password, it should end with '='
 </aside>
 
 ### HTTP Request
@@ -131,52 +131,43 @@ When calling the GetCompanies endpoint, use an RSA encoded password, it should e
 <div class="api-endpoint">
 	<div class="endpoint-data">
 		<i class="label label-post">POST</i>
-		<h6>https://login.smartconnect.com/v1/companies</h6>
+		<h6>https://{{api_url}}/gettoken</h6>
 	</div>
 </div>
 
 > To retrieve a list of companies, use this code:
 
 ```shell
-curl POST "https://login.smartconnect.com/v1/companies"
+curl POST "{{api_url}}/GetCompanyList?email={{Username}}&password={{EncryptedPassword}}"
   -H 'Accept: application/json' 
-  -d '{
-    "Email": "demo.user@eonesolutions.com",
-    "Password":"Ua4r0AK8f5xuLeFGhmBtg0SP9cXYT+YUDAMbNKZ53VHAN3lQIoOTue4bIhAs+G2dPloF++5rOcDOmVhKaeAyrfQhIDw/1sHH0k90H2ubTGDCJ0zK3ewfXDXY2y3c8q6f7XShgVthACHNOpMV7BZXn2kDGQRR1WWHwJw4zBG+bGw=",
-    "ClientName": "shell",
-    "IpAddress": "127.0.0.1"
-    }'
 ```
 
 ```python
 import requests
 import json
-url = "https://login.smartconnect.com/v1/companies"
+url = "{{API Url}}/GetCompanyList?email={{Username}}&password={{EncryptedPassword}}&companyId={{Customer Id}}"
 
-payload = json.dumps({"Email":{{email}},"Password":get_encrypted_password({{password}}),"ClientName":"Python","IpAddress":"127.0.0.1"})
-headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-response = requests.post(url, data = payload, headers = headers)
-#Format and print response
-print(json.dumps(json.loads(response.text), indent=4, sort_keys=True))
+response = requests.request("POST", url)
+
+print(response.text.encode('utf8'))
 ```
 
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "{{api_url}}/GetCompanyList?email={{Username}}&password={{EncryptedPassword}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-string sendstring = "{\"Email\": \"demo.user@eonesolutions.com\",\"Password\":\"{{encrypedPassword}}\", \"ClientName\": \"C#\",\"IpAddress\": \"127.0.0.1\"\r\n}";
-System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.smartconnect.com/v1/companies");
+System.Net.WebRequest request = System.Net.WebRequest.Create("https://{{api_url}}/GetCompanyList?email={{Username}}&password={{EncryptedPassword}}");
 request.Method = "POST";
-request.ContentLength = sendstring.Length;
+request.ContentLength = 0;
 request.ContentType = "application/json";
-using(Stream reqStream = request.GetRequestStream())
-{
- reqStream.Write(Encoding.ASCII.GetBytes(sendstring),0,sendstring.Length);
-}
+
 System.Net.WebResponse response = request.GetResponse();
 
-string result = string.Empty;
 using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
 {
  string result = responseStream.ReadToEnd(); 
@@ -188,58 +179,18 @@ return result;
 > The above command returns JSON structured like this:
 
 ```json
-{
-    "UserId": "57c5d9c3-4af6-4e46-a553-44u62235a9ff",
-    "Email": "demo.user@eonesolutions.com",
-    "FirstName": "Demo",
-    "LastName": "User",
-    "Status": "Active",
-    "ChangePasswordAtLogin": false,
-    "EmailVerified": true,
-    "Products": [
-        {
-            "ProductId": "8de68f74-9162-4973-84a3-43c8673d0d80",
-            "Name": "SmartConnect",
-            "ProductStatus": "Active",
-            "Status": "Active",
-            "Role": "Administrator",
-            "Type": "User",
-            "RegionId": "41360865-b555-419f-80bf-1484b2719e36",
-            "RegionName": "North Central US",
-            "AccountProductUserId": "1fc363a3-a01c-4398-bb85-aca78809a621",
-            "AccountProductId": "fb60defa-6bae-4fa8-b164-c8b06f3fac3d",
-            "Account": {
-                "AccountId": "72b01219-a6a4-4e25-8d93-58d0584bf75f",
-                "Name": "Test Demo Account",
-                "EQA": false,
-                "Status": "Active",
-                "Currency": "USD"
-            },
-            "Subscription": {
-                "AccountProductSubscriptionId": "652fa33c-d971-4ed7-a52f-3c8ca3ff1737",
-                "Status": "Expired",
-                "HasSupport": true,
-                "AdditionalConnections": 0,
-                "SubscriptionEndDate": "2020-11-20T00:00:00",
-                "Plan": {
-                    "SubscriptionPlanId": "8215427c-fab9-4c26-ae97-244b4d8512af",
-                    "Name": "SmartConnect Professional",
-                    "ConnectionCount": 6,
-                    "HasSupport": true,
-                    "PerpetualLicense": false,
-                    "Status": "Active"
-                },
-                "ExpiredString": " - inactive subscription",
-                "Expired": true
-            },
-            "Instances": [],
-            "WebClientUrl": "appeqa.smartconnect.com",
-            "ApiUrl": "smartconnect-na-scheduler.azurewebsites.net/API",
-            "ConnectionCount": 6,
-            "AccountProductStatusString": " - inactive subscription"
-        }
-    ]
-}
+[
+    {
+        "Id": "48caf272-d140-449c-aa3b-c5d0a03082dc",
+        "Name": "Demo Company 1",
+        "SubscriptionExpiry": null
+    },
+    {
+        "Id": "2a1aec61-e7d0-4fb0-b597-d08cc2992efa",
+        "Name": "Demo Company 2",
+        "SubscriptionExpiry": null
+    }
+]
 ```
 ## GetToken
 
@@ -275,11 +226,27 @@ print(response.text.encode('utf8'))
 ```
 
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "{{api_url}}/GetToken?email={{Username}}&password={{EncryptedPassword}}&companyId={{Customer Id}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("https://{{api_url}}/GetToken?email={{Username}}&password={{EncryptedPassword}}&&companyId={{Customer Id}");
+request.Method = "POST";
+request.ContentLength = 0;
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns a string:
@@ -324,11 +291,27 @@ response = requests.request("POST", url)
 print(response.text.encode('utf8'))
 ```
 ```javascript
-coming soon...
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "{{api_url}}/validate?token={{Token}}");
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send();
 ```
 
 ```csharp
-coming soon...
+System.Net.WebRequest request = System.Net.WebRequest.Create("{{api_url}}/validate?token={{Token}}");
+request.Method = "POST";
+request.ContentLength = 0;
+request.ContentType = "application/json";
+
+System.Net.WebResponse response = request.GetResponse();
+
+using(System.IO.StreamReader responseStream = new System.IO.StreamReader(response.GetResponseStream()))
+{
+ string result = responseStream.ReadToEnd(); 
+}
+
+return result;
 ```
 
 > The above command returns a boolean:
