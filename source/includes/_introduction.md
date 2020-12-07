@@ -36,5 +36,5 @@ Password | Password the user uses to access the SmartConnect.com application.
 ![Image of API Settings](https://www.eonesolutions.com/wp-content/uploads/2020/01/API_Details.png)
 
 <aside class="notice">
-A Postman collection with examples can be [downloaded here](https://www.eonesolutions.com/wp-content/uploads/2020/01/SmartConnect.com-Web-Service-Collection.zip)
+A Postman collection with examples can be <a href="https://www.eonesolutions.com/wp-content/uploads/2020/01/SmartConnect.com-Web-Service-Collection.zip">downloaded here</a>
 </aside>

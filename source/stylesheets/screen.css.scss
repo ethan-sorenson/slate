@@ -42,6 +42,7 @@ html, body {
   -webkit-text-size-adjust: none; /* Never autoresize text */
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // TABLE OF CONTENTS
 ////////////////////////////////////////////////////////////////////////////////
@@ -509,6 +510,15 @@ html, body {
     border-radius: 4px;
     border: 1px solid #F7E633;
     background: linear-gradient(to top left, #F7E633 0%, #F1D32F 100%);
+  }
+
+  a {
+    color: $link-color;
+    text-decoration: none;
+  
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
