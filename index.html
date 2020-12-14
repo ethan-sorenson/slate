@@ -280,7 +280,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-ae2881b8.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-a9313a33.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-9f013770.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-e033bdd3.js"></script>
 
@@ -1862,27 +1862,27 @@ Real-time data source maps will not show in this list.
 </div>
 
 <blockquote>
-<p>Sample XML Payload:
-<code>xml
-&lt;RequestData&gt;
-    &lt;Variables&gt;
-        &lt;ArrayOfVariableOfstringstring&gt;
-            &lt;VariableOfstringstring&gt;
-                &lt;Key&gt;GBL_COUNTY&lt;/Key&gt;
-                &lt;Value&gt;ND&lt;/Value&gt;
-            &lt;/VariableOfstringstring&gt;
-        &lt;/ArrayOfVariableOfstringstring&gt;
-    &lt;/Variables&gt;
-    &lt;Xml&gt;
-        &lt;Table&gt;
-            &lt;Name&gt;C00070&lt;/Name&gt;
-            &lt;No&gt;C00070&lt;/No&gt;
-            &lt;County&gt;ID&lt;/County&gt;
-        &lt;/Table&gt;
-    &lt;/Xml&gt;
-&lt;/RequestData&gt;
-</code></p>
-
+<p>Sample XML Payload:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight xml tab-xml"><code><span class="nt">&lt;RequestData&gt;</span>
+    <span class="nt">&lt;Variables&gt;</span>
+        <span class="nt">&lt;ArrayOfVariableOfstringstring&gt;</span>
+            <span class="nt">&lt;VariableOfstringstring&gt;</span>
+                <span class="nt">&lt;Key&gt;</span>GBL_COUNTY<span class="nt">&lt;/Key&gt;</span>
+                <span class="nt">&lt;Value&gt;</span>ND<span class="nt">&lt;/Value&gt;</span>
+            <span class="nt">&lt;/VariableOfstringstring&gt;</span>
+        <span class="nt">&lt;/ArrayOfVariableOfstringstring&gt;</span>
+    <span class="nt">&lt;/Variables&gt;</span>
+    <span class="nt">&lt;Xml&gt;</span>
+        <span class="nt">&lt;Table&gt;</span>
+            <span class="nt">&lt;Name&gt;</span>C00070<span class="nt">&lt;/Name&gt;</span>
+            <span class="nt">&lt;No&gt;</span>C00070<span class="nt">&lt;/No&gt;</span>
+            <span class="nt">&lt;County&gt;</span>ID<span class="nt">&lt;/County&gt;</span>
+        <span class="nt">&lt;/Table&gt;</span>
+    <span class="nt">&lt;/Xml&gt;</span>
+<span class="nt">&lt;/RequestData&gt;</span>
+</code></pre></div>
+<blockquote>
 <p>To run a specified process with provided source data, use this code:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"{{API Url}}/RunMapDataTable?token={{Token}}&amp;mapKey={{mapKey}}"</span> <span class="se">\</span>
