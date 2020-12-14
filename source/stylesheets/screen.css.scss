@@ -556,11 +556,9 @@ body {
 
     &:hover {
       text-decoration: underline;
-      color: #fff;
-      text-decoration: underline;
 
       &:hover {
-        text-decoration: none;
+        text-decoration: underline;
       }
 
       &.warning {
