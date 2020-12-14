@@ -305,6 +305,27 @@ This endpoint runs the specified process with the provided XML data table.
 	</div>
 </div>
 
+> Sample XML Payload:
+```xml
+<RequestData>
+    <Variables>
+        <ArrayOfVariableOfstringstring>
+            <VariableOfstringstring>
+                <Key>GBL_COUNTY</Key>
+                <Value>ND</Value>
+            </VariableOfstringstring>
+        </ArrayOfVariableOfstringstring>
+    </Variables>
+    <Xml>
+        <Table>
+            <Name>C00070</Name>
+            <No>C00070</No>
+            <County>ID</County>
+        </Table>
+    </Xml>
+</RequestData>
+```
+
 > To run a specified process with provided source data, use this code:
 
 ```shell
@@ -312,12 +333,22 @@ curl POST "{{API Url}}/RunMapDataTable?token={{Token}}&mapKey={{mapKey}}" \
   -H 'Content-Type: text/xml' \
   -H 'Accept: application/json' 
   -d '<RequestData>
-        <Table> 
-          <accountnumber>C0007</accountnumber> 
-          <CustomerID>IDs</CustomerID> 
-          <name>Test Account 007</name> 
-        </Table> 
-      </RequestData>'
+        <Variables>
+            <ArrayOfVariableOfstringstring>
+                <VariableOfstringstring>
+                    <Key>GBL_COUNTY</Key>
+                    <Value>ND</Value>
+                </VariableOfstringstring>
+            </ArrayOfVariableOfstringstring>
+        </Variables>
+        <Xml>
+            <Table>
+                <Name>C00070</Name>
+                <No>C00070</No>
+                <County>ID</County>
+            </Table>
+        </Xml>
+    </RequestData>
 ```
 
 ```python
@@ -329,20 +360,46 @@ headers = {
   'Accept': 'application/json'
 }
 payload = 
-" <RequestData>
-    <Table> 
-      <accountnumber>C0007</accountnumber> 
-      <CustomerID>IDs</CustomerID> 
-      <name>Test Account 007</name> 
-    </Table> 
-  </RequestData>
-"
+"<RequestData>
+    <Variables>
+        <ArrayOfVariableOfstringstring>
+            <VariableOfstringstring>
+                <Key>GBL_COUNTY</Key>
+                <Value>ND</Value>
+            </VariableOfstringstring>
+        </ArrayOfVariableOfstringstring>
+    </Variables>
+    <Xml>
+        <Table>
+            <Name>C00070</Name>
+            <No>C00070</No>
+            <County>ID</County>
+        </Table>
+    </Xml>
+</RequestData>"
+
 response = requests.request("POST", url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
 ```
 ```javascript
-var data =  "<RequestData><Table><accountnumber>C00070</accountnumber><CustomerID>ID</CustomerID><name>Test Account 001</name></Table></RequestData>";
+var data =  "<RequestData>"
++ "<Variables>"
++ "<ArrayOfVariableOfstringstring>"
++ "<VariableOfstringstring>"
++ "<Key>GBL_COUNTY</Key>"
++ "<Value>ND</Value>"
++ "</VariableOfstringstring>"
++ "</ArrayOfVariableOfstringstring>"
++ "</Variables>"
++ "<Xml>"
++ "<Table>"
++ "<Name>C00070</Name>"
++ "<No>C00070</No>"
++ "<County>ID</County>"
++ "</Table>"
++ "</Xml>"
++ "</RequestData>";
 var xhr = new XMLHttpRequest();
 xhr.open("POST", "{{API Url}}/RunMapDataTable?token={{Token}}&mapKey={{mapKey}}");
 xhr.setRequestHeader("Content-Type", "application/xml");
@@ -352,7 +409,23 @@ xhr.send(data);
 ```
 
 ```csharp
-string data = "<RequestData><Table><accountnumber>C00070</accountnumber><CustomerID>ID</CustomerID><name>Test Account 001</name></Table></RequestData>";
+string data =  "<RequestData>"
++ "<Variables>"
++ "<ArrayOfVariableOfstringstring>"
++ "<VariableOfstringstring>"
++ "<Key>GBL_COUNTY</Key>"
++ "<Value>ND</Value>"
++ "</VariableOfstringstring>"
++ "</ArrayOfVariableOfstringstring>"
++ "</Variables>"
++ "<Xml>"
++ "<Table>"
++ "<Name>C00070</Name>"
++ "<No>C00070</No>"
++ "<County>ID</County>"
++ "</Table>"
++ "</Xml>"
++ "</RequestData>";
 System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/RunMapDataTable?token={{Token}}&mapKey={{mapKey}}");
 request.Method = "POST";
 request.ContentType = "application/xml";
@@ -410,6 +483,28 @@ This endpoint runs the specified process with the provided XML data table, and r
 	</div>
 </div>
 
+> Sample XML Payload:
+
+```xml
+<RequestData>
+    <Variables>
+        <ArrayOfVariableOfstringstring>
+            <VariableOfstringstring>
+                <Key>GBL_COUNTY</Key>
+                <Value>ND</Value>
+            </VariableOfstringstring>
+        </ArrayOfVariableOfstringstring>
+    </Variables>
+    <Xml>
+        <Table>
+            <Name>C00070</Name>
+            <No>C00070</No>
+            <County>ID</County>
+        </Table>
+    </Xml>
+</RequestData>
+```
+
 > To run a specified process with provided source data, use this code:
 
 ```shell
@@ -417,12 +512,22 @@ curl POST "{{API Url}}/RunMapDataTableWithErrors?token={{Token}}&mapKey={{mapKey
   -H 'Content-Type: text/xml' \
   -H 'Accept: application/json' 
   -d '<RequestData>
-        <Table> 
-          <accountnumber>C0007</accountnumber> 
-          <CustomerID>IDs</CustomerID> 
-          <name>Test Account 007</name> 
-        </Table> 
-      </RequestData>'
+        <Variables>
+            <ArrayOfVariableOfstringstring>
+                <VariableOfstringstring>
+                    <Key>GBL_COUNTY</Key>
+                    <Value>ND</Value>
+                </VariableOfstringstring>
+            </ArrayOfVariableOfstringstring>
+        </Variables>
+        <Xml>
+            <Table>
+                <Name>C00070</Name>
+                <No>C00070</No>
+                <County>ID</County>
+            </Table>
+        </Xml>
+    </RequestData>
 ```
 
 ```python
@@ -434,21 +539,47 @@ headers = {
   'Accept': 'application/json'
 }
 payload = 
-" <RequestData>
-    <Table> 
-      <accountnumber>C0007</accountnumber> 
-      <CustomerID>IDs</CustomerID> 
-      <name>Test Account 007</name> 
-    </Table> 
-  </RequestData>
-"
+"<RequestData>
+    <Variables>
+        <ArrayOfVariableOfstringstring>
+            <VariableOfstringstring>
+                <Key>GBL_COUNTY</Key>
+                <Value>ND</Value>
+            </VariableOfstringstring>
+        </ArrayOfVariableOfstringstring>
+    </Variables>
+    <Xml>
+        <Table>
+            <Name>C00070</Name>
+            <No>C00070</No>
+            <County>ID</County>
+        </Table>
+    </Xml>
+</RequestData>"
+
 response = requests.request("POST", url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
 ```
 
 ```javascript
-var data =  "<RequestData><Table><accountnumber>C00070</accountnumber><CustomerID>ID</CustomerID><name>Test Account 001</name></Table></RequestData>";
+var data =  "<RequestData>"
++ "<Variables>"
++ "<ArrayOfVariableOfstringstring>"
++ "<VariableOfstringstring>"
++ "<Key>GBL_COUNTY</Key>"
++ "<Value>ND</Value>"
++ "</VariableOfstringstring>"
++ "</ArrayOfVariableOfstringstring>"
++ "</Variables>"
++ "<Xml>"
++ "<Table>"
++ "<Name>C00070</Name>"
++ "<No>C00070</No>"
++ "<County>ID</County>"
++ "</Table>"
++ "</Xml>"
++ "</RequestData>";
 var xhr = new XMLHttpRequest();
 xhr.open("POST", "{{API Url}}/RunMapDataTableWithErrors?token={{Token}}&mapKey={{mapKey}}");
 xhr.setRequestHeader("Content-Type", "application/xml");
@@ -458,7 +589,23 @@ xhr.send(data);
 ```
 
 ```csharp
-string data = "<RequestData><Table><accountnumber>C00070</accountnumber><CustomerID>ID</CustomerID><name>Test Account 001</name></Table></RequestData>";
+string data =  "<RequestData>"
++ "<Variables>"
++ "<ArrayOfVariableOfstringstring>"
++ "<VariableOfstringstring>"
++ "<Key>GBL_COUNTY</Key>"
++ "<Value>ND</Value>"
++ "</VariableOfstringstring>"
++ "</ArrayOfVariableOfstringstring>"
++ "</Variables>"
++ "<Xml>"
++ "<Table>"
++ "<Name>C00070</Name>"
++ "<No>C00070</No>"
++ "<County>ID</County>"
++ "</Table>"
++ "</Xml>"
++ "</RequestData>";
 System.Net.WebRequest request = System.Net.WebRequest.Create("{{API Url}}/RunMapDataTableWithErrors?token={{Token}}&mapKey={{mapKey}}");
 request.Method = "POST";
 request.ContentType = "application/xml";
