@@ -280,13 +280,10 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-4f479527.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-ae2881b8.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-9f013770.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-e033bdd3.js"></script>
 
-    <script>
-      $(function() { setupCodeCopy(); });
-    </script>
   </head>
 
   <body class="index" data-languages="[&quot;shell&quot;,&quot;python&quot;,&quot;javascript&quot;,&quot;csharp&quot;]">
@@ -417,6 +414,7 @@
       </ul>
         <ul class="toc-footer">
             <li><a href='https://www.eonesolutions.com/Shop/SmartConnect'>Sign Up for a SmartConnect Trial</a></li>
+            <li><a href='https://smartconnect.com/knowledge-base-2'>SmartConnect Documentation</a></li>
             <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -442,7 +440,7 @@
 <p>Connecting to the API will require the following information. The API Settings can be access in SmartConnect.com &gt; System API Settings</p>
 
 <aside class="warning">
-If using JavaScript, note that the web service does not support <a href="https://www.eonesolutions.com/help-article/no-access-control-allow-origin-header-is-present-on-the-requested-resource/">Cross origin resource sharin</a>
+If using JavaScript, note that the web service does not support <a href="https://www.eonesolutions.com/help-article/no-access-control-allow-origin-header-is-present-on-the-requested-resource/">Cross origin resource sharing (CORS)</a>
 </aside>
 <h3 id='needed-variables'>Needed Variables</h3>
 <table><thead>
@@ -1864,19 +1862,50 @@ Real-time data source maps will not show in this list.
 </div>
 
 <blockquote>
+<p>Sample XML Payload:
+<code>xml
+&lt;RequestData&gt;
+    &lt;Variables&gt;
+        &lt;ArrayOfVariableOfstringstring&gt;
+            &lt;VariableOfstringstring&gt;
+                &lt;Key&gt;GBL_COUNTY&lt;/Key&gt;
+                &lt;Value&gt;ND&lt;/Value&gt;
+            &lt;/VariableOfstringstring&gt;
+        &lt;/ArrayOfVariableOfstringstring&gt;
+    &lt;/Variables&gt;
+    &lt;Xml&gt;
+        &lt;Table&gt;
+            &lt;Name&gt;C00070&lt;/Name&gt;
+            &lt;No&gt;C00070&lt;/No&gt;
+            &lt;County&gt;ID&lt;/County&gt;
+        &lt;/Table&gt;
+    &lt;/Xml&gt;
+&lt;/RequestData&gt;
+</code></p>
+
 <p>To run a specified process with provided source data, use this code:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"{{API Url}}/RunMapDataTable?token={{Token}}&amp;mapKey={{mapKey}}"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: text/xml'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
   <span class="nt">-d</span> <span class="s1">'&lt;RequestData&gt;
-        &lt;Table&gt; 
-          &lt;accountnumber&gt;C0007&lt;/accountnumber&gt; 
-          &lt;CustomerID&gt;IDs&lt;/CustomerID&gt; 
-          &lt;name&gt;Test Account 007&lt;/name&gt; 
-        &lt;/Table&gt; 
-      &lt;/RequestData&gt;'</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+        &lt;Variables&gt;
+            &lt;ArrayOfVariableOfstringstring&gt;
+                &lt;VariableOfstringstring&gt;
+                    &lt;Key&gt;GBL_COUNTY&lt;/Key&gt;
+                    &lt;Value&gt;ND&lt;/Value&gt;
+                &lt;/VariableOfstringstring&gt;
+            &lt;/ArrayOfVariableOfstringstring&gt;
+        &lt;/Variables&gt;
+        &lt;Xml&gt;
+            &lt;Table&gt;
+                &lt;Name&gt;C00070&lt;/Name&gt;
+                &lt;No&gt;C00070&lt;/No&gt;
+                &lt;County&gt;ID&lt;/County&gt;
+            &lt;/Table&gt;
+        &lt;/Xml&gt;
+    &lt;/RequestData&gt;
+</span></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/RunMapDataTable?token={{Token}}&amp;mapKey={{mapKey}}"</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -1884,25 +1913,67 @@ Real-time data source maps will not show in this list.
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 <span class="n">payload</span> <span class="o">=</span> 
-<span class="s">" &lt;RequestData&gt;
-    &lt;Table&gt; 
-      &lt;accountnumber&gt;C0007&lt;/accountnumber&gt; 
-      &lt;CustomerID&gt;IDs&lt;/CustomerID&gt; 
-      &lt;name&gt;Test Account 007&lt;/name&gt; 
-    &lt;/Table&gt; 
-  &lt;/RequestData&gt;
-"</span>
+<span class="s">"&lt;RequestData&gt;
+    &lt;Variables&gt;
+        &lt;ArrayOfVariableOfstringstring&gt;
+            &lt;VariableOfstringstring&gt;
+                &lt;Key&gt;GBL_COUNTY&lt;/Key&gt;
+                &lt;Value&gt;ND&lt;/Value&gt;
+            &lt;/VariableOfstringstring&gt;
+        &lt;/ArrayOfVariableOfstringstring&gt;
+    &lt;/Variables&gt;
+    &lt;Xml&gt;
+        &lt;Table&gt;
+            &lt;Name&gt;C00070&lt;/Name&gt;
+            &lt;No&gt;C00070&lt;/No&gt;
+            &lt;County&gt;ID&lt;/County&gt;
+        &lt;/Table&gt;
+    &lt;/Xml&gt;
+&lt;/RequestData&gt;"</span>
+
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span>  <span class="dl">"</span><span class="s2">&lt;RequestData&gt;&lt;Table&gt;&lt;accountnumber&gt;C00070&lt;/accountnumber&gt;&lt;CustomerID&gt;ID&lt;/CustomerID&gt;&lt;name&gt;Test Account 001&lt;/name&gt;&lt;/Table&gt;&lt;/RequestData&gt;</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span>  <span class="dl">"</span><span class="s2">&lt;RequestData&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Variables&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;ArrayOfVariableOfstringstring&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;VariableOfstringstring&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Key&gt;GBL_COUNTY&lt;/Key&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Value&gt;ND&lt;/Value&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/VariableOfstringstring&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/ArrayOfVariableOfstringstring&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/Variables&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Xml&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Table&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Name&gt;C00070&lt;/Name&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;No&gt;C00070&lt;/No&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;County&gt;ID&lt;/County&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/Table&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/Xml&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/RequestData&gt;</span><span class="dl">"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
 <span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">{{API Url}}/RunMapDataTable?token={{Token}}&amp;mapKey={{mapKey}}</span><span class="dl">"</span><span class="p">);</span>
 <span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/xml</span><span class="dl">"</span><span class="p">);</span>
 <span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Accept</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
 
 <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="kt">string</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"&lt;RequestData&gt;&lt;Table&gt;&lt;accountnumber&gt;C00070&lt;/accountnumber&gt;&lt;CustomerID&gt;ID&lt;/CustomerID&gt;&lt;name&gt;Test Account 001&lt;/name&gt;&lt;/Table&gt;&lt;/RequestData&gt;"</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="kt">string</span> <span class="n">data</span> <span class="p">=</span>  <span class="s">"&lt;RequestData&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Variables&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;ArrayOfVariableOfstringstring&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;VariableOfstringstring&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Key&gt;GBL_COUNTY&lt;/Key&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Value&gt;ND&lt;/Value&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/VariableOfstringstring&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/ArrayOfVariableOfstringstring&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/Variables&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Xml&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Table&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Name&gt;C00070&lt;/Name&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;No&gt;C00070&lt;/No&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;County&gt;ID&lt;/County&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/Table&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/Xml&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/RequestData&gt;"</span><span class="p">;</span>
 <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"{{API Url}}/RunMapDataTable?token={{Token}}&amp;mapKey={{mapKey}}"</span><span class="p">);</span>
 <span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"POST"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">ContentType</span> <span class="p">=</span> <span class="s">"application/xml"</span><span class="p">;</span>
@@ -1967,19 +2038,50 @@ Real-time data source maps will not show in this list.
 </div>
 
 <blockquote>
+<p>Sample XML Payload:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight xml tab-xml"><code><span class="nt">&lt;RequestData&gt;</span>
+    <span class="nt">&lt;Variables&gt;</span>
+        <span class="nt">&lt;ArrayOfVariableOfstringstring&gt;</span>
+            <span class="nt">&lt;VariableOfstringstring&gt;</span>
+                <span class="nt">&lt;Key&gt;</span>GBL_COUNTY<span class="nt">&lt;/Key&gt;</span>
+                <span class="nt">&lt;Value&gt;</span>ND<span class="nt">&lt;/Value&gt;</span>
+            <span class="nt">&lt;/VariableOfstringstring&gt;</span>
+        <span class="nt">&lt;/ArrayOfVariableOfstringstring&gt;</span>
+    <span class="nt">&lt;/Variables&gt;</span>
+    <span class="nt">&lt;Xml&gt;</span>
+        <span class="nt">&lt;Table&gt;</span>
+            <span class="nt">&lt;Name&gt;</span>C00070<span class="nt">&lt;/Name&gt;</span>
+            <span class="nt">&lt;No&gt;</span>C00070<span class="nt">&lt;/No&gt;</span>
+            <span class="nt">&lt;County&gt;</span>ID<span class="nt">&lt;/County&gt;</span>
+        <span class="nt">&lt;/Table&gt;</span>
+    <span class="nt">&lt;/Xml&gt;</span>
+<span class="nt">&lt;/RequestData&gt;</span>
+</code></pre></div>
+<blockquote>
 <p>To run a specified process with provided source data, use this code:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl POST <span class="s2">"{{API Url}}/RunMapDataTableWithErrors?token={{Token}}&amp;mapKey={{mapKey}}"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: text/xml'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> 
   <span class="nt">-d</span> <span class="s1">'&lt;RequestData&gt;
-        &lt;Table&gt; 
-          &lt;accountnumber&gt;C0007&lt;/accountnumber&gt; 
-          &lt;CustomerID&gt;IDs&lt;/CustomerID&gt; 
-          &lt;name&gt;Test Account 007&lt;/name&gt; 
-        &lt;/Table&gt; 
-      &lt;/RequestData&gt;'</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+        &lt;Variables&gt;
+            &lt;ArrayOfVariableOfstringstring&gt;
+                &lt;VariableOfstringstring&gt;
+                    &lt;Key&gt;GBL_COUNTY&lt;/Key&gt;
+                    &lt;Value&gt;ND&lt;/Value&gt;
+                &lt;/VariableOfstringstring&gt;
+            &lt;/ArrayOfVariableOfstringstring&gt;
+        &lt;/Variables&gt;
+        &lt;Xml&gt;
+            &lt;Table&gt;
+                &lt;Name&gt;C00070&lt;/Name&gt;
+                &lt;No&gt;C00070&lt;/No&gt;
+                &lt;County&gt;ID&lt;/County&gt;
+            &lt;/Table&gt;
+        &lt;/Xml&gt;
+    &lt;/RequestData&gt;
+</span></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"{{API Url}}/RunMapDataTableWithErrors?token={{Token}}&amp;mapKey={{mapKey}}"</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -1987,25 +2089,67 @@ Real-time data source maps will not show in this list.
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 <span class="n">payload</span> <span class="o">=</span> 
-<span class="s">" &lt;RequestData&gt;
-    &lt;Table&gt; 
-      &lt;accountnumber&gt;C0007&lt;/accountnumber&gt; 
-      &lt;CustomerID&gt;IDs&lt;/CustomerID&gt; 
-      &lt;name&gt;Test Account 007&lt;/name&gt; 
-    &lt;/Table&gt; 
-  &lt;/RequestData&gt;
-"</span>
+<span class="s">"&lt;RequestData&gt;
+    &lt;Variables&gt;
+        &lt;ArrayOfVariableOfstringstring&gt;
+            &lt;VariableOfstringstring&gt;
+                &lt;Key&gt;GBL_COUNTY&lt;/Key&gt;
+                &lt;Value&gt;ND&lt;/Value&gt;
+            &lt;/VariableOfstringstring&gt;
+        &lt;/ArrayOfVariableOfstringstring&gt;
+    &lt;/Variables&gt;
+    &lt;Xml&gt;
+        &lt;Table&gt;
+            &lt;Name&gt;C00070&lt;/Name&gt;
+            &lt;No&gt;C00070&lt;/No&gt;
+            &lt;County&gt;ID&lt;/County&gt;
+        &lt;/Table&gt;
+    &lt;/Xml&gt;
+&lt;/RequestData&gt;"</span>
+
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf8'</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span>  <span class="dl">"</span><span class="s2">&lt;RequestData&gt;&lt;Table&gt;&lt;accountnumber&gt;C00070&lt;/accountnumber&gt;&lt;CustomerID&gt;ID&lt;/CustomerID&gt;&lt;name&gt;Test Account 001&lt;/name&gt;&lt;/Table&gt;&lt;/RequestData&gt;</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span>  <span class="dl">"</span><span class="s2">&lt;RequestData&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Variables&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;ArrayOfVariableOfstringstring&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;VariableOfstringstring&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Key&gt;GBL_COUNTY&lt;/Key&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Value&gt;ND&lt;/Value&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/VariableOfstringstring&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/ArrayOfVariableOfstringstring&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/Variables&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Xml&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Table&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;Name&gt;C00070&lt;/Name&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;No&gt;C00070&lt;/No&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;County&gt;ID&lt;/County&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/Table&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/Xml&gt;</span><span class="dl">"</span>
+<span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/RequestData&gt;</span><span class="dl">"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
 <span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">{{API Url}}/RunMapDataTableWithErrors?token={{Token}}&amp;mapKey={{mapKey}}</span><span class="dl">"</span><span class="p">);</span>
 <span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/xml</span><span class="dl">"</span><span class="p">);</span>
 <span class="nx">xhr</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Accept</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
 
 <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="kt">string</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"&lt;RequestData&gt;&lt;Table&gt;&lt;accountnumber&gt;C00070&lt;/accountnumber&gt;&lt;CustomerID&gt;ID&lt;/CustomerID&gt;&lt;name&gt;Test Account 001&lt;/name&gt;&lt;/Table&gt;&lt;/RequestData&gt;"</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="kt">string</span> <span class="n">data</span> <span class="p">=</span>  <span class="s">"&lt;RequestData&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Variables&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;ArrayOfVariableOfstringstring&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;VariableOfstringstring&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Key&gt;GBL_COUNTY&lt;/Key&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Value&gt;ND&lt;/Value&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/VariableOfstringstring&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/ArrayOfVariableOfstringstring&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/Variables&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Xml&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Table&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;Name&gt;C00070&lt;/Name&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;No&gt;C00070&lt;/No&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;County&gt;ID&lt;/County&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/Table&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/Xml&gt;"</span>
+<span class="p">+</span> <span class="s">"&lt;/RequestData&gt;"</span><span class="p">;</span>
 <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"{{API Url}}/RunMapDataTableWithErrors?token={{Token}}&amp;mapKey={{mapKey}}"</span><span class="p">);</span>
 <span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"POST"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">ContentType</span> <span class="p">=</span> <span class="s">"application/xml"</span><span class="p">;</span>
