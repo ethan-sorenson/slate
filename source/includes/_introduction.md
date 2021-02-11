@@ -33,7 +33,7 @@ Username | The email address of a user with access to the SmartConnect tenant.
 Password | Password the user uses to access the SmartConnect.com application.
 
 
-![Image of API Settings](https://www.eonesolutions.com/wp-content/uploads/2020/01/API_Details.png)
+![Image of API Settings](https://www.eonesolutions.com/wp-content/uploads/2021/02/Screenshot-2021-02-11-100103.png)
 
 <aside class="notice">
 A Postman collection with examples can be <a href="https://www.eonesolutions.com/wp-content/uploads/2020/01/SmartConnect.com-Web-Service-Collection.zip">downloaded here</a>

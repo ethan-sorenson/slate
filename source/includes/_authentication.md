@@ -80,7 +80,7 @@ function encryptPassword() {
 
 ```csharp
 string password = "my password";
-string rsaXml;
+string rsaXml, encryptedPwd;
 System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.smartconnect.com/v1/public-key");
 request.Method = "POST";
 request.ContentLength = 0;
@@ -97,8 +97,12 @@ using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider(1024))
         RSA.FromXmlString(rsaXml);
 	    byte[] plainText = System.Text.Encoding.ASCII.GetBytes(password);
         byte[] cipherbytes = RSA.Encrypt(plainText, System.Security.Cryptography.RSAEncryptionPadding.Pkcs1);
+        //Base64 encode bytes
+        encryptedPwd = Convert.ToBase64String(cipherbytes);
+        //URL encode encrypted password
+        encryptedPwd = System.Net.WebUtility.UrlEncode(encryptedPwd);
 	    // Message Box with encrypted password
-        MessageBox.Show(Convert.ToBase64String(cipherbytes));
+        MessageBox.Show(encryptedPwd);
     }
 ```
 
