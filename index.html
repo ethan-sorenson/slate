@@ -467,7 +467,7 @@ If using JavaScript, note that the web service does not support <a href="https:/
 </tr>
 </tbody></table>
 
-<p><img src="https://www.eonesolutions.com/wp-content/uploads/2020/01/API_Details.png" alt="Image of API Settings" /></p>
+<p><img src="https://www.eonesolutions.com/wp-content/uploads/2021/02/Screenshot-2021-02-11-100103.png" alt="Image of API Settings" /></p>
 
 <aside class="notice">
 A Postman collection with examples can be <a href="https://www.eonesolutions.com/wp-content/uploads/2020/01/SmartConnect.com-Web-Service-Collection.zip">downloaded here</a>
@@ -540,7 +540,7 @@ Encryption will require the most recent public-key containing the RSA module and
   <span class="dl">'</span><span class="s1">&lt;br&gt;Unencrypted Password: </span><span class="dl">'</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">btoa</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">)));</span>
 <span class="p">}</span>
 </code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="kt">string</span> <span class="n">password</span> <span class="p">=</span> <span class="s">"my password"</span><span class="p">;</span>
-<span class="kt">string</span> <span class="n">rsaXml</span><span class="p">;</span>
+<span class="kt">string</span> <span class="n">rsaXml</span><span class="p">,</span> <span class="n">encryptedPwd</span><span class="p">;</span>
 <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebRequest</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"https://login.smartconnect.com/v1/public-key"</span><span class="p">);</span>
 <span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"POST"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">ContentLength</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
@@ -557,8 +557,12 @@ Encryption will require the most recent public-key containing the RSA module and
         <span class="n">RSA</span><span class="p">.</span><span class="nf">FromXmlString</span><span class="p">(</span><span class="n">rsaXml</span><span class="p">);</span>
         <span class="kt">byte</span><span class="p">[]</span> <span class="n">plainText</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">Encoding</span><span class="p">.</span><span class="n">ASCII</span><span class="p">.</span><span class="nf">GetBytes</span><span class="p">(</span><span class="n">password</span><span class="p">);</span>
         <span class="kt">byte</span><span class="p">[]</span> <span class="n">cipherbytes</span> <span class="p">=</span> <span class="n">RSA</span><span class="p">.</span><span class="nf">Encrypt</span><span class="p">(</span><span class="n">plainText</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">RSAEncryptionPadding</span><span class="p">.</span><span class="n">Pkcs1</span><span class="p">);</span>
+        <span class="c1">//Base64 encode bytes</span>
+        <span class="n">encryptedPwd</span> <span class="p">=</span> <span class="n">Convert</span><span class="p">.</span><span class="nf">ToBase64String</span><span class="p">(</span><span class="n">cipherbytes</span><span class="p">);</span>
+        <span class="c1">//URL encode encrypted password</span>
+        <span class="n">encryptedPwd</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebUtility</span><span class="p">.</span><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">encryptedPwd</span><span class="p">);</span>
         <span class="c1">// Message Box with encrypted password</span>
-        <span class="n">MessageBox</span><span class="p">.</span><span class="nf">Show</span><span class="p">(</span><span class="n">Convert</span><span class="p">.</span><span class="nf">ToBase64String</span><span class="p">(</span><span class="n">cipherbytes</span><span class="p">));</span>
+        <span class="n">MessageBox</span><span class="p">.</span><span class="nf">Show</span><span class="p">(</span><span class="n">encryptedPwd</span><span class="p">);</span>
     <span class="p">}</span>
 </code></pre></div>
 <blockquote>
